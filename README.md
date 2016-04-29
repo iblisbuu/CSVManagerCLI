@@ -81,6 +81,7 @@ Current project is: CSVManager [2006] - url_name: csvparser
 
 ## DESCRIBE csvmanage task
 
+```
 Usage: csvmanage [options] <list|create|delete|addfile|update>
 
   Create new REST API Endpoints from CSV file(s) - assumes existing csvparser JSON project installed
@@ -99,7 +100,7 @@ Usage: csvmanage [options] <list|create|delete|addfile|update>
     -p, --prefix <prefix>            Datasource Prefix name (default main)
     -c, --useColumnMap <boolean>     Optional: If true, assumes column map for table already exists or has been modified (default false)
     -f, --file <fileName>            The directory path and name to the CSV file
-```sh
+```
 ##List
 
 The List function will list all of the admin API Projects, Datasources and Existing CSVManager definitions.  You will need the API Project URL and the datasource prefix to create an imported table.
@@ -137,7 +138,7 @@ node csvlac.js csvmanage delete --ident 95
 ## Create
 This will take a file and create a new table in the target system - the flags allow for different types of delimiters, column headers on the first row, and if you want to use your own column map
 
-'''
+```
 node csvlac.js csvmanage create -n TestCSV -t TestCSV -d ',' -h true -e false -r false -u csvtables -p main -c false --file samples/testcsv.csv
 I main:csvdefinition/96 ident:96 csvMapName:TestCSV tableName:TestCSV Description: firstRowHasHeader:true haltOnFirstError:true useColumnMap:false
 Request took: 574ms - # objects touched: 1
@@ -146,7 +147,8 @@ I main:csvheader/71 ident:71 csv_ident:96 importDate:[null] filename:[null] cont
 U main:csvheader/71 ident:71 csv_ident:96 importDate:2016-04-27 filename:[null] content:0x4b6579436f6c2c4... processCSVHeaderFlag:true processCSVFlag:false
 I main:csvdefinition/97 ident:97 csvMapName:TestCSV tableName:TestCSV Description: firstRowHasHeader:true haltOnFirstError:true useColumnMap:false
 Request took: 20ms - # objects touched: 1
-'''
+```
+
 ## Add File
 This will add another CSV file to the existing CSV Definition (a new header row) - there are flags to determine if you want to replace or append
 ```
