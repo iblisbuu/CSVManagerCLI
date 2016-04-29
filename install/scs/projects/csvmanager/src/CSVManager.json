@@ -1,0 +1,2307 @@
+[
+  {
+    "ident": 2006,
+    "ts": "2016-04-12T11:14:15+00:00",
+    "exportVersion": "v4",
+    "adminSchemaVersion": "20160407",
+    "name": "CSVManager",
+    "url_name": "csvparser",
+    "comments": "General utility to parse a CSV Table into a target table",
+    "status": null,
+    "is_active": true,
+    "account_ident": 1000,
+    "authprovider_ident": 1000,
+    "@metadata": {
+      "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport/2006",
+      "checksum": "A:77722edb48a5dbd5",
+      "nonpersistent": [
+        "exportVersion",
+        "adminSchemaVersion"
+      ]
+    },
+    "Topics": [
+    ],
+    "Rules": [
+      {
+        "ident": 2050,
+        "ts": "2016-04-13T12:38:37+00:00",
+        "entity_name": "main:csvcolumnmap",
+        "attribute_name": "AttrDataType",
+        "prop1": null,
+        "prop2": null,
+        "prop3": null,
+        "prop4": "javascript",
+        "prop5": null,
+        "rule_text1": "var ans = row.AttrDataType;\nif(row.AttrDataType === null){\n    ans = 'text'; //DEFAULT\n    if(row.TableAttrName.indexOf(\"amount\") > -1 \n     || row.TableAttrName.indexOf('tax') > -1\n      || row.TableAttrName.indexOf('price') > -1\n      || row.TableAttrName.indexOf('weight') > -1\n      || row.TableAttrName.indexOf('fee') > -1\n      || row.TableAttrName.indexOf('dimension') > -1\n      || row.TableAttrName.indexOf('length') > -1\n      || row.TableAttrName.indexOf('sales') > -1) {\n        ans = 'money';\n    } else {\n        if(row.TableAttrName.indexOf('date') > -1) {\n            ans = 'date';\n        } else {\n            if(row.TableAttrName.indexOf(\"percent\") > -1) {\n                ans = 'percent';\n            } else {\n                if(row.TableAttrName.indexOf('unit') > -1 \n                    || row.TableAttrName.indexOf('items') > -1 \n                    || row.TableAttrName.indexOf('session') > -1) {\n                    ans = 'number';\n                } \n            }\n        }\n    }\n}\n\nreturn ans;",
+        "rule_text2": null,
+        "rule_text3": null,
+        "rule_text4": null,
+        "rule_text5": null,
+        "predicate": null,
+        "name": "Set Default DataType",
+        "auto_name": "Derive AttrDataType as var ans = row.AttrDataType;\nif(row.AttrDataType === null){\n    ans = 'text'; //DEFAULT\n    if(row.TableAttrName.indexOf(\"amo...",
+        "verbs": null,
+        "comments": "This was written as an example of how to work with know data sets that have common labels",
+        "active": true,
+        "sqlable": false,
+        "jit": false,
+        "project_ident": 2006,
+        "ruletype_ident": 3,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Rules/2050",
+          "checksum": "A:5b2c6fee13262263"
+        },
+        "RuleTopics": [
+        ]
+      },
+      {
+        "ident": 2051,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "entity_name": "main:csvcolumnmap",
+        "attribute_name": "dbDataType",
+        "prop1": null,
+        "prop2": null,
+        "prop3": null,
+        "prop4": null,
+        "prop5": null,
+        "rule_text1": "fk_ColumnMap_ValidDataTypes",
+        "rule_text2": "dbDataType",
+        "rule_text3": null,
+        "rule_text4": null,
+        "rule_text5": null,
+        "predicate": null,
+        "name": null,
+        "auto_name": "Derive dbDataType as parentcopy(fk_ColumnMap_ValidDataTypes.dbDataType)",
+        "verbs": null,
+        "comments": null,
+        "active": true,
+        "sqlable": false,
+        "jit": false,
+        "project_ident": 2006,
+        "ruletype_ident": 4,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Rules/2051",
+          "checksum": "A:278984c489a89840"
+        },
+        "RuleTopics": [
+        ]
+      },
+      {
+        "ident": 2106,
+        "ts": "2016-04-13T17:09:17+00:00",
+        "entity_name": "main:csvdefinition",
+        "attribute_name": null,
+        "prop1": null,
+        "prop2": null,
+        "prop3": null,
+        "prop4": "javascript",
+        "prop5": null,
+        "rule_text1": "var lac = new com.ca.project.csv.LACUtil();\nvar ans = lac.isValidPrefix(row.project_url,row.prefix);\nlog.debug(\"isValidPrefix: \"+ans);\nreturn ans === true;",
+        "rule_text2": "Invalid Prefix {prefix} for Project URL {project_url}",
+        "rule_text3": null,
+        "rule_text4": null,
+        "rule_text5": null,
+        "predicate": null,
+        "name": "Validate Prefix",
+        "auto_name": "Validation var lac = new com.ca.project.csv.LACUtil();\nvar ans = lac.isValidPrefix(row.project_url,row.prefix);\nlog.debug(\"isValidPrefix: \"+ans);\nr...",
+        "verbs": null,
+        "comments": null,
+        "active": true,
+        "sqlable": false,
+        "jit": false,
+        "project_ident": 2006,
+        "ruletype_ident": 5,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Rules/2106",
+          "checksum": "A:91eeab5839399871"
+        },
+        "RuleTopics": [
+        ]
+      },
+      {
+        "ident": 2108,
+        "ts": "2016-04-13T17:23:29+00:00",
+        "entity_name": "main:csvdefinition",
+        "attribute_name": null,
+        "prop1": null,
+        "prop2": null,
+        "prop3": null,
+        "prop4": "javascript",
+        "prop5": null,
+        "rule_text1": "var lac = new com.ca.project.csv.LACUtil();\nlog.debug(\"Is URL Valid \"+lac.isValidProjectURL(row.project_url));\nreturn lac.isValidProjectURL(row.project_url) === true;",
+        "rule_text2": "Invalid Project URL {project_url}",
+        "rule_text3": null,
+        "rule_text4": null,
+        "rule_text5": null,
+        "predicate": null,
+        "name": "Validate Project URL",
+        "auto_name": "Validation var lac = new com.ca.project.csv.LACUtil();\nlog.debug(\"Is URL Valid \"+lac.isValidProjectURL(row.project_url));\nreturn lac.isValidProject...",
+        "verbs": null,
+        "comments": null,
+        "active": true,
+        "sqlable": false,
+        "jit": false,
+        "project_ident": 2006,
+        "ruletype_ident": 5,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Rules/2108",
+          "checksum": "A:0b6fdfd88228a696"
+        },
+        "RuleTopics": [
+        ]
+      },
+      {
+        "ident": 2105,
+        "ts": "2016-04-13T16:55:27+00:00",
+        "entity_name": "main:csvdefinition",
+        "attribute_name": null,
+        "prop1": null,
+        "prop2": null,
+        "prop3": null,
+        "prop4": "javascript",
+        "prop5": null,
+        "rule_text1": "var lac = new com.ca.project.csv.LACUtil();\nvar entityExist = lac.getMetaEntity(row.project_url,row.tableName);\nlog.debug(\"Does ENtity Exist \"+entityExist);\nif(entityExist !== null){\n    log.debug(\"Entity Exists - extract and populate the column map\");\n    \n}",
+        "rule_text2": null,
+        "rule_text3": null,
+        "rule_text4": null,
+        "rule_text5": null,
+        "predicate": null,
+        "name": "EntityExists",
+        "auto_name": "Event: var lac = new com.ca.project.csv.LACUtil();\nvar entityExist = lac.getMetaEntity(row.project_url,row.tableName);\nlog.debug(\"Does ENtity Exist...",
+        "verbs": "INSERT,UPDATE,",
+        "comments": null,
+        "active": true,
+        "sqlable": false,
+        "jit": false,
+        "project_ident": 2006,
+        "ruletype_ident": 7,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Rules/2105",
+          "checksum": "A:e3b8896a54e39563"
+        },
+        "RuleTopics": [
+        ]
+      },
+      {
+        "ident": 2052,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "entity_name": "main:csvdefinition",
+        "attribute_name": "columnDelim",
+        "prop1": null,
+        "prop2": null,
+        "prop3": null,
+        "prop4": "javascript",
+        "prop5": null,
+        "rule_text1": "var delim = row.columnDelim;\nif(delim === null) {\n    delim = \",\";\n}\nreturn delim;",
+        "rule_text2": null,
+        "rule_text3": null,
+        "rule_text4": null,
+        "rule_text5": null,
+        "predicate": null,
+        "name": null,
+        "auto_name": "Derive columnDelim as var delim = row.columnDelim;\nif(delim === null) {\n    delim = \",\";\n}\nreturn delim;",
+        "verbs": null,
+        "comments": null,
+        "active": true,
+        "sqlable": false,
+        "jit": true,
+        "project_ident": 2006,
+        "ruletype_ident": 3,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Rules/2052",
+          "checksum": "A:8715abd4ed13378d"
+        },
+        "RuleTopics": [
+        ]
+      },
+      {
+        "ident": 2053,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "entity_name": "main:csvdefinition",
+        "attribute_name": "firstRowHasHeader",
+        "prop1": null,
+        "prop2": null,
+        "prop3": null,
+        "prop4": "javascript",
+        "prop5": null,
+        "rule_text1": "var hasHeader = row.firstRowHasHeader;\nif(hasHeader === null) {\n    hasHeader = true;\n}\nreturn hasHeader;",
+        "rule_text2": null,
+        "rule_text3": null,
+        "rule_text4": null,
+        "rule_text5": null,
+        "predicate": null,
+        "name": null,
+        "auto_name": "Derive firstRowHasHeader as var hasHeader = row.firstRowHasHeader;\nif(hasHeader === null) {\n    hasHeader = true;\n}\nreturn hasHeader;",
+        "verbs": null,
+        "comments": null,
+        "active": true,
+        "sqlable": false,
+        "jit": true,
+        "project_ident": 2006,
+        "ruletype_ident": 3,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Rules/2053",
+          "checksum": "A:0654e81fe3823ac0"
+        },
+        "RuleTopics": [
+        ]
+      },
+      {
+        "ident": 2054,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "entity_name": "main:csvdefinition",
+        "attribute_name": "haltOnFirstError",
+        "prop1": null,
+        "prop2": null,
+        "prop3": null,
+        "prop4": "javascript",
+        "prop5": null,
+        "rule_text1": "var haltOnError = row.haltOnFirstError;\nif(haltOnError === null) {\n    haltOnError = false;\n}\nreturn haltOnError;",
+        "rule_text2": null,
+        "rule_text3": null,
+        "rule_text4": null,
+        "rule_text5": null,
+        "predicate": null,
+        "name": null,
+        "auto_name": "Derive haltOnFirstError as var haltOnError = row.haltOnFirstError;\nif(haltOnError === null) {\n    haltOnError = false;\n}\nreturn haltOnError;",
+        "verbs": null,
+        "comments": null,
+        "active": true,
+        "sqlable": false,
+        "jit": true,
+        "project_ident": 2006,
+        "ruletype_ident": 3,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Rules/2054",
+          "checksum": "A:df131da0778a4e49"
+        },
+        "RuleTopics": [
+        ]
+      },
+      {
+        "ident": 2055,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "entity_name": "main:csvdefinition",
+        "attribute_name": "prefix",
+        "prop1": null,
+        "prop2": null,
+        "prop3": null,
+        "prop4": "javascript",
+        "prop5": null,
+        "rule_text1": "var prefix = row.prefix;\nif(prefix === null) {\n    prefix = \"main\";//req.getDataStoreConnectionManager(req.projectId).getMetaENtity(need entity name).getMetaSchema().getPrefix();\n}\nreturn prefix;",
+        "rule_text2": null,
+        "rule_text3": null,
+        "rule_text4": null,
+        "rule_text5": null,
+        "predicate": null,
+        "name": null,
+        "auto_name": "Derive prefix as var prefix = row.prefix;\nif(prefix === null) {\n    prefix = \"main\";//req.getDataStoreConnectionManager(req.projectId).getMetaENtit...",
+        "verbs": null,
+        "comments": null,
+        "active": true,
+        "sqlable": false,
+        "jit": true,
+        "project_ident": 2006,
+        "ruletype_ident": 3,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Rules/2055",
+          "checksum": "A:e3efd776f8576296"
+        },
+        "RuleTopics": [
+        ]
+      },
+      {
+        "ident": 2056,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "entity_name": "main:csvdefinition",
+        "attribute_name": "project_url",
+        "prop1": null,
+        "prop2": null,
+        "prop3": null,
+        "prop4": "javascript",
+        "prop5": null,
+        "rule_text1": "var url = row.project_url\nif(url === null) {\n  //  url = req.Project.getUrlName();\n}\nreturn url;",
+        "rule_text2": null,
+        "rule_text3": null,
+        "rule_text4": null,
+        "rule_text5": null,
+        "predicate": null,
+        "name": null,
+        "auto_name": "Derive project_url as var url = row.project_url\nif(url === null) {\n  //  url = req.Project.getUrlName();\n}\nreturn url;",
+        "verbs": null,
+        "comments": null,
+        "active": true,
+        "sqlable": false,
+        "jit": false,
+        "project_ident": 2006,
+        "ruletype_ident": 3,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Rules/2056",
+          "checksum": "A:dd8b6469bb26e5fb"
+        },
+        "RuleTopics": [
+        ]
+      },
+      {
+        "ident": 2057,
+        "ts": "2016-04-13T08:10:17+00:00",
+        "entity_name": "main:csvheader",
+        "attribute_name": null,
+        "prop1": null,
+        "prop2": null,
+        "prop3": null,
+        "prop4": "javascript",
+        "prop5": null,
+        "rule_text1": "log.debug(\"ROW IDENT \"+row.ident);\nif(row.genTableFlag  && oldRow.genTableFlag !== true && row.content === null && row.filename !== null && row.filename.length > 0){\n    log.debug(\"Start Persistent of CSV Table\");\n  var csv = new com.ca.project.csv.CSVParser();\n  csv.setColumnSep(row.fk_definiiton_header.columnDelim);\n  csv.setHasHeaderRow(row.fk_definiiton_header.firstRowHasHeader);\n  csv.setFailOnFirstError(row.fk_definiiton_header.haltOnFirstError);\n  csv.setUrlName(row.fk_definiiton_header.project_url);\n  csv.setEntityOrResourceName(row.fk_definiiton_header.tableName);\n  csv.setPrefix(row.fk_definiiton_header.prefix);\n  csv.loadFile(\"\",row.filename);\n  var tableName = row.fk_definiiton_header.tableName;\n   log.debug(\"Table Name:\"+tableName);\n  var sql = csv.genSQLTable();\n  log.debug(sql);\n  csv.createTableFromSQL(sql,row.fk_definiiton_header.prefix);\n  csv.writeCSVToEntity(row.ident);\n  row.countDetailRows = csv.getTotalRecordCount();\n   if(row.processCSVHeaderFlag !== true){\n    csv.writeColumnMap(row.csv_ident);\n    row.processCSVHeaderFlag = true;\n  }\n  csv.close();\n}",
+        "rule_text2": null,
+        "rule_text3": null,
+        "rule_text4": null,
+        "rule_text5": null,
+        "predicate": null,
+        "name": "GentCSVTableFromFilename",
+        "auto_name": "Commit event: log.debug(\"ROW IDENT \"+row.ident);\nif(row.genTableFlag  && oldRow.genTableFlag !== true && row.content === null && row.filename !== n...",
+        "verbs": "UPDATE,",
+        "comments": null,
+        "active": true,
+        "sqlable": false,
+        "jit": false,
+        "project_ident": 2006,
+        "ruletype_ident": 9,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Rules/2057",
+          "checksum": "A:732a73e54ad2b54f"
+        },
+        "RuleTopics": [
+        ]
+      },
+      {
+        "ident": 2058,
+        "ts": "2016-04-13T09:05:17+00:00",
+        "entity_name": "main:csvheader",
+        "attribute_name": null,
+        "prop1": null,
+        "prop2": null,
+        "prop3": null,
+        "prop4": "javascript",
+        "prop5": null,
+        "rule_text1": "\nif(row.genTableFlag  && oldRow.genTableFlag !== true && row.content !== null){\n    log.debug(\"Start Persistent of CSV Table\");\n  var csv = new com.ca.project.csv.CSVParser();\n  csv.setColumnSep(row.fk_definiiton_header.columnDelim);\n  csv.setHasHeaderRow(row.fk_definiiton_header.firstRowHasHeader);\n  csv.setFailOnFirstError(row.fk_definiiton_header.haltOnFirstError);\n  csv.setUrlName(row.fk_definiiton_header.project_url);\n  csv.setEntityOrResourceName(row.fk_definiiton_header.tableName);\n  csv.setPrefix(row.fk_definiiton_header.prefix);\n  csv.loadFile(row.content);\n  //csv.loadFile(\"c:\\temp\\\",\"myfile.csv\");\n  var tableName = row.fk_definiiton_header.tableName;\n   log.debug(\"Table Name:\"+tableName);\n  var sql = csv.genSQLTable();\n  log.debug(sql);\n  csv.createTableFromSQL(sql,row.fk_definiiton_header.prefix);\n  csv.writeCSVToEntity(row.ident);\n \n  row.countDetailRows = csv.getTotalRecordCount();\n  if(row.processCSVHeaderFlag !== true){\n    csv.writeColumnMap(row.csv_ident);\n    row.processCSVHeaderFlag = true;\n  }\n  csv.close();\n}",
+        "rule_text2": null,
+        "rule_text3": null,
+        "rule_text4": null,
+        "rule_text5": null,
+        "predicate": null,
+        "name": "GenCSVTableFromUpload",
+        "auto_name": "Commit event: \nif(row.genTableFlag  && oldRow.genTableFlag !== true && row.content !== null){\n    log.debug(\"Start Persistent of CSV Table\");\n  var...",
+        "verbs": "UPDATE,",
+        "comments": null,
+        "active": false,
+        "sqlable": false,
+        "jit": false,
+        "project_ident": 2006,
+        "ruletype_ident": 9,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Rules/2058",
+          "checksum": "A:fc4a1e629a15a7d7"
+        },
+        "RuleTopics": [
+        ]
+      },
+      {
+        "ident": 2103,
+        "ts": "2016-04-13T16:32:39+00:00",
+        "entity_name": "main:csvheader",
+        "attribute_name": null,
+        "prop1": null,
+        "prop2": null,
+        "prop3": null,
+        "prop4": "javascript",
+        "prop5": null,
+        "rule_text1": "\nif(row.genTableFlag  && oldRow.genTableFlag !== true && row.content !== null){\n  log.debug(\"Start Persistent of CSV Table\");\n  var csv = new com.ca.project.csv.CSVParser();\n  csv.process(logicContext);\n  row.countDetailRows = csv.getTotalRecordCount();\n  row.processCSVHeaderFlag = true;\n  csv.close();\n}",
+        "rule_text2": null,
+        "rule_text3": null,
+        "rule_text4": null,
+        "rule_text5": null,
+        "predicate": null,
+        "name": "ProcessContentRule",
+        "auto_name": "Commit event: \nif(row.genTableFlag  && oldRow.genTableFlag !== true && row.content !== null){\n  log.debug(\"Start Persistent of CSV Table\");\n  var c...",
+        "verbs": "UPDATE,",
+        "comments": null,
+        "active": true,
+        "sqlable": false,
+        "jit": false,
+        "project_ident": 2006,
+        "ruletype_ident": 9,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Rules/2103",
+          "checksum": "A:a8c4143cb232a1c8"
+        },
+        "RuleTopics": [
+        ]
+      },
+      {
+        "ident": 2059,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "entity_name": "main:csvheader",
+        "attribute_name": "importDate",
+        "prop1": null,
+        "prop2": null,
+        "prop3": null,
+        "prop4": "javascript",
+        "prop5": null,
+        "rule_text1": "var importDate = row.importDate;\nlog.debug(\"VERB:\"+logicContext.verb + \" importDate:\"+importDate + \" row.genTableFlag:\"+row.genTableFlag);\nif(importDate === null && row.genTableFlag){\n    importDate = new Date();\n}\nlog.debug(\"importDate:\"+importDate);\nreturn importDate;",
+        "rule_text2": null,
+        "rule_text3": null,
+        "rule_text4": null,
+        "rule_text5": null,
+        "predicate": null,
+        "name": "set import date",
+        "auto_name": "Derive importDate as var importDate = row.importDate;\nlog.debug(\"VERB:\"+logicContext.verb + \" importDate:\"+importDate + \" row.genTableFlag:\"+row.ge...",
+        "verbs": null,
+        "comments": null,
+        "active": true,
+        "sqlable": false,
+        "jit": false,
+        "project_ident": 2006,
+        "ruletype_ident": 3,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Rules/2059",
+          "checksum": "A:27d5a3d06d561725"
+        },
+        "RuleTopics": [
+        ]
+      }
+    ],
+    "ApiVersions": [
+      {
+        "ident": 2006,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "name": "v1",
+        "comments": "",
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions/2006",
+          "checksum": "A:765e787df227e35f"
+        },
+        "Resources": [
+          {
+            "ident": 2051,
+            "ts": "2016-04-12T11:14:15+00:00",
+            "resource_type_ident": 3,
+            "prefix": "main",
+            "table_name": "columnmap",
+            "name": "GenDDL",
+            "description": null,
+            "is_collection": "Y",
+            "join_condition": null,
+            "filter": null,
+            "sorting": null,
+            "attach_path": null,
+            "caching": null,
+            "custom_class": null,
+            "code_text": "var ddl = \"CREATE TABLE %%tablename%%  (\\n\";\nvar ident = 23; //for loop over header\nvar filter = { sysfilter: \"equal(header_ident:\" + ident + \")\" };\nvar columnMap = SysUtility.getResource(\"columnMap\",filter);\nvar datatype;\nlog.debug(JSON.stringify(columnMap,null,2));\nvar sep = \",\";\nddl += \" ident BIGINT(20) NOT NULL AUTO_INCREMENT \";\nfor(var i = 0 ; i < columnMap.length ; i++){\n    ddl += \"\\n\";\n    datatype = (columnMap[i].dbDataType !== null)?columnMap[i].dbDataType:\"VARCHAR(100)\";\n    ddl += sep + columnMap[i].TableAttrName + \" \" + datatype + \" NULL\";\n}\nddl += \"\\n,header_ident BIGINT(20) NULL  \";\nddl += \"\\n, PRIMARY KEY (ident)\";\nddl += \");\";\n//this will create the table from this DDL\n//var schema = new Packages.CreateTableSchema();\n//schema.createSchema(ddl, 2014,\"main\");\n \n return {\"ddl\": ddl};",
+            "filter_code": "",
+            "serial_filter": null,
+            "prop1": null,
+            "prop2": null,
+            "prop3": null,
+            "prop4": null,
+            "prop5": null,
+            "container_ident": null,
+            "sibling_rank": 100,
+            "combined": false,
+            "root_ident": null,
+            "linked_ident": null,
+            "apiversion_ident": 2006,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources/2051",
+              "checksum": "A:bc31a8a75d4651eb"
+            },
+            "ResourceAttributes": [
+            ]
+          },
+          {
+            "ident": 2052,
+            "ts": "2016-04-12T11:14:15+00:00",
+            "resource_type_ident": 1,
+            "prefix": "main",
+            "table_name": "csvcolumnmap",
+            "name": "columnMap",
+            "description": "used to insert names for source an target attributes",
+            "is_collection": "Y",
+            "join_condition": null,
+            "filter": null,
+            "sorting": null,
+            "attach_path": null,
+            "caching": null,
+            "custom_class": null,
+            "code_text": null,
+            "filter_code": "",
+            "serial_filter": null,
+            "prop1": null,
+            "prop2": null,
+            "prop3": null,
+            "prop4": null,
+            "prop5": null,
+            "container_ident": null,
+            "sibling_rank": 100,
+            "combined": false,
+            "root_ident": null,
+            "linked_ident": null,
+            "apiversion_ident": 2006,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources/2052",
+              "checksum": "A:964b3dc1068c24d3"
+            },
+            "ResourceAttributes": [
+              {
+                "ident": 2160,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "TableAttrName",
+                "description": null,
+                "column_name": "TableAttrName",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2052,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2160",
+                  "checksum": "A:07c31ac575253475"
+                }
+              },
+              {
+                "ident": 2161,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "ident",
+                "description": null,
+                "column_name": "ident",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2052,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2161",
+                  "checksum": "A:4560ec7689513f29"
+                }
+              },
+              {
+                "ident": 2162,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "isKeyAttr",
+                "description": null,
+                "column_name": "isKeyAttr",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2052,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2162",
+                  "checksum": "A:806a0d3db355d106"
+                }
+              },
+              {
+                "ident": 2163,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "AttrDataType",
+                "description": null,
+                "column_name": "AttrDataType",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2052,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2163",
+                  "checksum": "A:c816b13addd03578"
+                }
+              },
+              {
+                "ident": 2164,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "CSVAttrName",
+                "description": null,
+                "column_name": "CSVAttrName",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2052,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2164",
+                  "checksum": "A:a90dffc6462ff985"
+                }
+              },
+              {
+                "ident": 2165,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "header_ident",
+                "description": null,
+                "column_name": "header_ident",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2052,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2165",
+                  "checksum": "A:32f21d6221167443"
+                }
+              },
+              {
+                "ident": 2166,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "dbDataType",
+                "description": null,
+                "column_name": "dbDataType",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2052,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2166",
+                  "checksum": "A:61d7fe1f171292a7"
+                }
+              },
+              {
+                "ident": 2167,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "isNullable",
+                "description": null,
+                "column_name": "isNullable",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2052,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2167",
+                  "checksum": "A:1fe47ac4c0208b60"
+                }
+              }
+            ]
+          },
+          {
+            "ident": 2053,
+            "ts": "2016-04-12T11:14:15+00:00",
+            "resource_type_ident": 1,
+            "prefix": "main",
+            "table_name": "csvdefinition",
+            "name": "CSVFileImport",
+            "description": null,
+            "is_collection": "Y",
+            "join_condition": null,
+            "filter": null,
+            "sorting": null,
+            "attach_path": null,
+            "caching": null,
+            "custom_class": null,
+            "code_text": null,
+            "filter_code": "",
+            "serial_filter": null,
+            "prop1": null,
+            "prop2": null,
+            "prop3": null,
+            "prop4": null,
+            "prop5": null,
+            "container_ident": null,
+            "sibling_rank": 100,
+            "combined": false,
+            "root_ident": null,
+            "linked_ident": null,
+            "apiversion_ident": 2006,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources/2053",
+              "checksum": "A:809fe31627cf8529"
+            },
+            "ResourceAttributes": [
+              {
+                "ident": 2168,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "csvMapName",
+                "description": null,
+                "column_name": "csvMapName",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2053,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2168",
+                  "checksum": "A:022516b8fc01567d"
+                }
+              },
+              {
+                "ident": 2169,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "tableName",
+                "description": null,
+                "column_name": "tableName",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2053,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2169",
+                  "checksum": "A:d79f1143e26bfefc"
+                }
+              },
+              {
+                "ident": 2170,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "Description",
+                "description": null,
+                "column_name": "Description",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2053,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2170",
+                  "checksum": "A:7e9d409e54b57e5c"
+                }
+              },
+              {
+                "ident": 2171,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "ident",
+                "description": null,
+                "column_name": "ident",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2053,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2171",
+                  "checksum": "A:bfd019750b7eeef7"
+                }
+              },
+              {
+                "ident": 2172,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "firstRowHasHeader",
+                "description": null,
+                "column_name": "firstRowHasHeader",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2053,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2172",
+                  "checksum": "A:be033dfe9545cd5e"
+                }
+              },
+              {
+                "ident": 2173,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "haltOnFirstError",
+                "description": null,
+                "column_name": "haltOnFirstError",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2053,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2173",
+                  "checksum": "A:1f7611abec9da848"
+                }
+              },
+              {
+                "ident": 2174,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "columnDelim",
+                "description": null,
+                "column_name": "columnDelim",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2053,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2174",
+                  "checksum": "A:5810a0cf249c79d3"
+                }
+              },
+              {
+                "ident": 2175,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "project_url",
+                "description": null,
+                "column_name": "project_url",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2053,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2175",
+                  "checksum": "A:339aeb4bcc0efd0c"
+                }
+              },
+              {
+                "ident": 2176,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "prefix",
+                "description": null,
+                "column_name": "prefix",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2053,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2176",
+                  "checksum": "A:9df277a350bc2943"
+                }
+              }
+            ]
+          },
+          {
+            "ident": 2054,
+            "ts": "2016-04-12T11:14:15+00:00",
+            "resource_type_ident": 1,
+            "prefix": "main",
+            "table_name": "csvdefinition",
+            "name": "fk_definiiton_header",
+            "description": null,
+            "is_collection": "N",
+            "join_condition": "ident = [csv_ident]",
+            "filter": null,
+            "sorting": null,
+            "attach_path": null,
+            "caching": null,
+            "custom_class": null,
+            "code_text": null,
+            "filter_code": "",
+            "serial_filter": null,
+            "prop1": null,
+            "prop2": null,
+            "prop3": null,
+            "prop4": null,
+            "prop5": null,
+            "container_ident": 2056,
+            "sibling_rank": 100,
+            "combined": true,
+            "root_ident": 2053,
+            "linked_ident": null,
+            "apiversion_ident": 2006,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources/2054",
+              "checksum": "A:ebd2b7bfb8691e0a"
+            },
+            "ResourceAttributes": [
+              {
+                "ident": 2177,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "tableName",
+                "description": null,
+                "column_name": "tableName",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2054,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2177",
+                  "checksum": "A:5b9e757aee9c0da6"
+                }
+              }
+            ]
+          },
+          {
+            "ident": 2055,
+            "ts": "2016-04-12T11:14:15+00:00",
+            "resource_type_ident": 1,
+            "prefix": "main",
+            "table_name": "csvdetails",
+            "name": "mapDetails",
+            "description": "used to insert child name/value pairs from map header content (uploaded CSV file)",
+            "is_collection": "Y",
+            "join_condition": null,
+            "filter": null,
+            "sorting": null,
+            "attach_path": null,
+            "caching": null,
+            "custom_class": null,
+            "code_text": null,
+            "filter_code": "",
+            "serial_filter": null,
+            "prop1": null,
+            "prop2": null,
+            "prop3": null,
+            "prop4": null,
+            "prop5": null,
+            "container_ident": null,
+            "sibling_rank": 100,
+            "combined": false,
+            "root_ident": null,
+            "linked_ident": null,
+            "apiversion_ident": 2006,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources/2055",
+              "checksum": "A:b7b234863c23a46a"
+            },
+            "ResourceAttributes": [
+            ]
+          },
+          {
+            "ident": 2056,
+            "ts": "2016-04-12T11:14:15+00:00",
+            "resource_type_ident": 1,
+            "prefix": "main",
+            "table_name": "csvheader",
+            "name": "csvheaderList",
+            "description": null,
+            "is_collection": "Y",
+            "join_condition": "csv_ident = [ident]",
+            "filter": null,
+            "sorting": null,
+            "attach_path": null,
+            "caching": null,
+            "custom_class": null,
+            "code_text": null,
+            "filter_code": "",
+            "serial_filter": null,
+            "prop1": null,
+            "prop2": null,
+            "prop3": null,
+            "prop4": null,
+            "prop5": null,
+            "container_ident": 2053,
+            "sibling_rank": 100,
+            "combined": false,
+            "root_ident": 2053,
+            "linked_ident": null,
+            "apiversion_ident": 2006,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources/2056",
+              "checksum": "A:b966738976117100"
+            },
+            "ResourceAttributes": [
+              {
+                "ident": 2178,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "filename",
+                "description": null,
+                "column_name": "filename",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2056,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2178",
+                  "checksum": "A:78fbdcafa46f17e9"
+                }
+              },
+              {
+                "ident": 2179,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "content",
+                "description": null,
+                "column_name": "content",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2056,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2179",
+                  "checksum": "A:aefe1ffc99b75efa"
+                }
+              },
+              {
+                "ident": 2180,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "header_ident",
+                "description": null,
+                "column_name": "ident",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2056,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2180",
+                  "checksum": "A:47f39b8c616acf7b"
+                }
+              },
+              {
+                "ident": 2181,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "csv_ident",
+                "description": null,
+                "column_name": "csv_ident",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2056,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2181",
+                  "checksum": "A:3c9ab65731a0bf48"
+                }
+              },
+              {
+                "ident": 2182,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "genTableFlag",
+                "description": null,
+                "column_name": "genTableFlag",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2056,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2182",
+                  "checksum": "A:c68fb2810c2a46a9"
+                }
+              },
+              {
+                "ident": 2183,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "importDate",
+                "description": null,
+                "column_name": "importDate",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2056,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2183",
+                  "checksum": "A:94e71ff32d3f6f27"
+                }
+              },
+              {
+                "ident": 2184,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "countDetailRows",
+                "description": null,
+                "column_name": "countDetailRows",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2056,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2184",
+                  "checksum": "A:8d7631371ea48d21"
+                }
+              }
+            ]
+          },
+          {
+            "ident": 2057,
+            "ts": "2016-04-12T11:14:15+00:00",
+            "resource_type_ident": 3,
+            "prefix": "main",
+            "table_name": "mapperdetails",
+            "name": "formatDates",
+            "description": null,
+            "is_collection": "N",
+            "join_condition": "",
+            "filter": null,
+            "sorting": null,
+            "attach_path": null,
+            "caching": null,
+            "custom_class": null,
+            "code_text": "var sdf =\"YYYY-MM-D\";//output witout time\nvar m = moment('2013-02-08 09:30:26.123+07:00');\nmoment().year(2014);\nmoment().date(31);\nmoment().month(12);\nvar dt = new Date();\nreturn { \"dt\": m,\n'dsf': sdf,\n\"date\": m.format(sdf)}",
+            "filter_code": "",
+            "serial_filter": null,
+            "prop1": null,
+            "prop2": null,
+            "prop3": null,
+            "prop4": null,
+            "prop5": null,
+            "container_ident": null,
+            "sibling_rank": 100,
+            "combined": false,
+            "root_ident": null,
+            "linked_ident": null,
+            "apiversion_ident": 2006,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources/2057",
+              "checksum": "A:9ed44244418d0627"
+            },
+            "ResourceAttributes": [
+            ]
+          },
+          {
+            "ident": 2058,
+            "ts": "2016-04-12T11:14:15+00:00",
+            "resource_type_ident": 3,
+            "prefix": "main",
+            "table_name": "mapperdetails",
+            "name": "formatMoney",
+            "description": null,
+            "is_collection": "N",
+            "join_condition": "",
+            "filter": null,
+            "sorting": null,
+            "attach_path": null,
+            "caching": null,
+            "custom_class": null,
+            "code_text": "var regex =/[$,()]/g;\nvar value = \"($1,2345.67)\";\nlog.debug(value.replace(regex,''));\nvar arg = (value.charAt(0) == '('? -1 : 1)*parseFloat(value.replace(/[$,()]/g,''));\nreturn { \n        \"regex\": regex,\n        \"money\":value,\n        \"value\": parseFloat(arg)\n        };",
+            "filter_code": "",
+            "serial_filter": null,
+            "prop1": null,
+            "prop2": null,
+            "prop3": null,
+            "prop4": null,
+            "prop5": null,
+            "container_ident": null,
+            "sibling_rank": 100,
+            "combined": false,
+            "root_ident": null,
+            "linked_ident": null,
+            "apiversion_ident": 2006,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources/2058",
+              "checksum": "A:6779a1a6fce8defd"
+            },
+            "ResourceAttributes": [
+            ]
+          },
+          {
+            "ident": 2059,
+            "ts": "2016-04-12T11:14:15+00:00",
+            "resource_type_ident": 1,
+            "prefix": "main",
+            "table_name": "test",
+            "name": "CSVTest",
+            "description": null,
+            "is_collection": "Y",
+            "join_condition": null,
+            "filter": null,
+            "sorting": null,
+            "attach_path": null,
+            "caching": null,
+            "custom_class": null,
+            "code_text": "",
+            "filter_code": "",
+            "serial_filter": null,
+            "prop1": "test",
+            "prop2": null,
+            "prop3": null,
+            "prop4": null,
+            "prop5": null,
+            "container_ident": null,
+            "sibling_rank": 100,
+            "combined": false,
+            "root_ident": null,
+            "linked_ident": null,
+            "apiversion_ident": 2006,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources/2059",
+              "checksum": "A:b229399cdd3c6ead"
+            },
+            "ResourceAttributes": [
+              {
+                "ident": 2185,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "moneycol",
+                "description": null,
+                "column_name": "moneycol",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2059,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2185",
+                  "checksum": "A:50b1610bebb3f3ff"
+                }
+              },
+              {
+                "ident": 2186,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "datecol",
+                "description": null,
+                "column_name": "datecol",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2059,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2186",
+                  "checksum": "A:b564fac12a822e8c"
+                }
+              },
+              {
+                "ident": 2187,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "boolcol",
+                "description": null,
+                "column_name": "boolcol",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2059,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2187",
+                  "checksum": "A:2b8829653ae53a71"
+                }
+              },
+              {
+                "ident": 2188,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "numbercol",
+                "description": null,
+                "column_name": "numbercol",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2059,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2188",
+                  "checksum": "A:bb0bbc4c0520be3d"
+                }
+              },
+              {
+                "ident": 2189,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "ROWID",
+                "description": null,
+                "column_name": "ROWID",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2059,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2189",
+                  "checksum": "A:d0e954bf289f2df8"
+                }
+              },
+              {
+                "ident": 2190,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "keycol",
+                "description": null,
+                "column_name": "keycol",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2059,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2190",
+                  "checksum": "A:9d7341bca915825a"
+                }
+              },
+              {
+                "ident": 2191,
+                "ts": "2016-04-12T11:14:15+00:00",
+                "name": "coltext",
+                "description": null,
+                "column_name": "coltext",
+                "format": null,
+                "formula": null,
+                "is_defined_key_part": false,
+                "resource_ident": 2059,
+                "code_type": null,
+                "@metadata": {
+                  "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiVersions.Resources.ResourceAttributes/2191",
+                  "checksum": "A:81d9c7193d30d8d9"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "DbaseSchemas": [
+      {
+        "ident": 2005,
+        "name": "MySQLCSVParser",
+        "comments": null,
+        "url": "jdbc:mysql://localhost:3306/csvparser",
+        "catalog_name": "csvparser",
+        "schema_name": null,
+        "user_name": "abl",
+        "password": null,
+        "salt": null,
+        "active": true,
+        "status": null,
+        "dbasetype_ident": 1,
+        "prefix": "main",
+        "datasource_name": null,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.DbaseSchemas/2005",
+          "checksum": "A:fb7a1e338754d747"
+        },
+        "TableInfos": [
+        ],
+        "NonPersistentAttributes": [
+        ]
+      }
+    ],
+    "ProjectLibraries": [
+      {
+        "ident": 2014,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "logic_library_ident": 500,
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectLibraries/2014",
+          "checksum": "A:143a4206d2e4e972"
+        },
+        "Library": {
+          "ident": 500,
+          "name": "Moment.js (with Locales)",
+          "@metadata": {
+            "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectLibraries.Library/500",
+            "checksum": "A:4a5bde8df91d6aff"
+          }
+        }
+      },
+      {
+        "ident": 2015,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "logic_library_ident": 2001,
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectLibraries/2015",
+          "checksum": "A:3e5262388c689f90"
+        },
+        "Library": {
+          "ident": 2001,
+          "name": "CSVManager",
+          "@metadata": {
+            "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectLibraries.Library/2001",
+            "checksum": "A:c5daec4e7b3c3125"
+          }
+        }
+      },
+      {
+        "ident": 2024,
+        "ts": "2016-04-12T11:46:38+00:00",
+        "logic_library_ident": 2011,
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectLibraries/2024",
+          "checksum": "A:0ebd77bcf29e051b"
+        },
+        "Library": {
+          "ident": 2011,
+          "name": "Annotations",
+          "@metadata": {
+            "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectLibraries.Library/2011",
+            "checksum": "A:5f4e9132dc330a1e"
+          }
+        }
+      },
+      {
+        "ident": 2025,
+        "ts": "2016-04-12T11:46:38+00:00",
+        "logic_library_ident": 2009,
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectLibraries/2025",
+          "checksum": "A:1e64b2794de016e1"
+        },
+        "Library": {
+          "ident": 2009,
+          "name": "JacksonCore",
+          "@metadata": {
+            "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectLibraries.Library/2009",
+            "checksum": "A:0fb2cded323404f6"
+          }
+        }
+      },
+      {
+        "ident": 2026,
+        "ts": "2016-04-12T11:46:38+00:00",
+        "logic_library_ident": 2008,
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectLibraries/2026",
+          "checksum": "A:02f33ada11c4f7ba"
+        },
+        "Library": {
+          "ident": 2008,
+          "name": "JacksonDatabind",
+          "@metadata": {
+            "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectLibraries.Library/2008",
+            "checksum": "A:319646d5fa3e51b5"
+          }
+        }
+      },
+      {
+        "ident": 2027,
+        "ts": "2016-04-12T11:46:38+00:00",
+        "logic_library_ident": 2007,
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectLibraries/2027",
+          "checksum": "A:d5dcaab147fc59d9"
+        },
+        "Library": {
+          "ident": 2007,
+          "name": "JacksonDataFormat",
+          "@metadata": {
+            "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectLibraries.Library/2007",
+            "checksum": "A:f55db9aa1cb6883e"
+          }
+        }
+      }
+    ],
+    "ProjectOptions": [
+      {
+        "ident": 2109,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "false",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 1,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2109",
+          "checksum": "A:916a9313e31f9a55"
+        }
+      },
+      {
+        "ident": 2110,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "http://www.espressologic.com/rest/",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 2,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2110",
+          "checksum": "A:835d4d1d29f162b4"
+        }
+      },
+      {
+        "ident": 2111,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "false",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 3,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2111",
+          "checksum": "A:2896043fe6c6b5c3"
+        }
+      },
+      {
+        "ident": 2112,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "@metadata",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 4,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2112",
+          "checksum": "A:fbd92def84671170"
+        }
+      },
+      {
+        "ident": 2113,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "2000",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 5,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2113",
+          "checksum": "A:0ecb444024989b81"
+        }
+      },
+      {
+        "ident": 2114,
+        "ts": "2016-04-12T16:42:49+00:00",
+        "option_value": "1000000",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 6,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2114",
+          "checksum": "A:9190b7010225cee5"
+        }
+      },
+      {
+        "ident": 2115,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "20",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 7,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2115",
+          "checksum": "A:b0e67abf1b813816"
+        }
+      },
+      {
+        "ident": 2116,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "5000",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 8,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2116",
+          "checksum": "A:a094a5bff5d096ca"
+        }
+      },
+      {
+        "ident": 2117,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "20",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 9,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2117",
+          "checksum": "A:a45dcf872e58322d"
+        }
+      },
+      {
+        "ident": 2118,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "100",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 10,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2118",
+          "checksum": "A:b6700532ceb4bf95"
+        }
+      },
+      {
+        "ident": 2119,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "2000",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 11,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2119",
+          "checksum": "A:7719943a48304d35"
+        }
+      },
+      {
+        "ident": 2120,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "true",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 12,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2120",
+          "checksum": "A:cf8640681232c1a9"
+        }
+      },
+      {
+        "ident": 2121,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": null,
+        "project_ident": 2006,
+        "projectoptiontype_ident": 13,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2121",
+          "checksum": "A:846a405eff0f97c2"
+        }
+      },
+      {
+        "ident": 2122,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": null,
+        "project_ident": 2006,
+        "projectoptiontype_ident": 14,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2122",
+          "checksum": "A:91e876382834cc84"
+        }
+      },
+      {
+        "ident": 2123,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": null,
+        "project_ident": 2006,
+        "projectoptiontype_ident": 16,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2123",
+          "checksum": "A:1e409f534aa71396"
+        }
+      },
+      {
+        "ident": 2124,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": null,
+        "project_ident": 2006,
+        "projectoptiontype_ident": 15,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2124",
+          "checksum": "A:8737bd5c68843f4d"
+        }
+      },
+      {
+        "ident": 2125,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "false",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 18,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2125",
+          "checksum": "A:10b9ecddd77111dd"
+        }
+      },
+      {
+        "ident": 2126,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "50",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 17,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2126",
+          "checksum": "A:767160734d8474f3"
+        }
+      },
+      {
+        "ident": 2127,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "false",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 19,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2127",
+          "checksum": "A:c74dae5dc66b796d"
+        }
+      },
+      {
+        "ident": 2128,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "0",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 20,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2128",
+          "checksum": "A:9179f137a6e1bd76"
+        }
+      },
+      {
+        "ident": 2129,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "null",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 22,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2129",
+          "checksum": "A:160b58d3ad83a934"
+        }
+      },
+      {
+        "ident": 2130,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "null",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 21,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2130",
+          "checksum": "A:00e0a3632ee656ec"
+        }
+      },
+      {
+        "ident": 2131,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "null",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 23,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2131",
+          "checksum": "A:197ee99fe2d53efe"
+        }
+      },
+      {
+        "ident": 2132,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "hex",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 25,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2132",
+          "checksum": "A:9f45edeeac8437f1"
+        }
+      },
+      {
+        "ident": 2133,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "null",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 24,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2133",
+          "checksum": "A:a77de14975339170"
+        }
+      },
+      {
+        "ident": 2134,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "option_value": "false",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 27,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2134",
+          "checksum": "A:0fa7e79d73fab8e9"
+        }
+      },
+      {
+        "ident": 2135,
+        "ts": "2016-04-12T16:35:01+00:00",
+        "option_value": "false",
+        "project_ident": 2006,
+        "projectoptiontype_ident": 26,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ProjectOptions/2135",
+          "checksum": "A:bf368755f91eb756"
+        }
+      }
+    ],
+    "ApiKeys": [
+      {
+        "ident": 2051,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "name": "Broad access",
+        "description": null,
+        "apikey": "data_full",
+        "status": "A",
+        "expiration": null,
+        "logging": "*=FINE",
+        "user_identifier": null,
+        "data": null,
+        "origin": null,
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiKeys/2051",
+          "checksum": "A:5c88dfa3dac24889"
+        }
+      },
+      {
+        "ident": 2052,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "name": "insertmapper",
+        "description": "special internal apiKey used ony by business logic",
+        "apikey": "WUyXwrLEgvhMxhUYYHhI",
+        "status": "A",
+        "expiration": null,
+        "logging": "*=FINE",
+        "user_identifier": null,
+        "data": null,
+        "origin": null,
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiKeys/2052",
+          "checksum": "A:aaaec8e5a9857411"
+        }
+      },
+      {
+        "ident": 2120,
+        "ts": "2016-04-13T13:47:50+00:00",
+        "name": "Temp AuthToken for demo [2016-04-13 17:47:50.262]",
+        "description": null,
+        "apikey": "4132358fe9a2554effc4aa8937adee36",
+        "status": "A",
+        "expiration": "2016-04-14T17:47:50+00:00",
+        "logging": "admini=FINE,buslog=FINE,depend=FINE,generl=FINE,persis=FINE,engine=FINE,resrcs=FINE,securi=FINE,sysdbg=FINE,ulogic=FINE",
+        "user_identifier": "demo",
+        "data": "username=demo",
+        "origin": "A",
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiKeys/2120",
+          "checksum": "A:b355784cc30136d9"
+        }
+      },
+      {
+        "ident": 2121,
+        "ts": "2016-04-13T13:47:50+00:00",
+        "name": "Temp AuthToken for demo [2016-04-13 17:47:50.266]",
+        "description": null,
+        "apikey": "dde15f908716b96674cc6e399f29f72d",
+        "status": "A",
+        "expiration": "2016-04-14T17:47:50+00:00",
+        "logging": "admini=FINE,buslog=FINE,depend=FINE,generl=FINE,persis=FINE,engine=FINE,resrcs=FINE,securi=FINE,sysdbg=FINE,ulogic=FINE",
+        "user_identifier": "demo",
+        "data": "username=demo",
+        "origin": "A",
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiKeys/2121",
+          "checksum": "A:87f43975ee27ea95"
+        }
+      },
+      {
+        "ident": 2122,
+        "ts": "2016-04-13T13:48:05+00:00",
+        "name": "Temp AuthToken for demo [2016-04-13 17:48:05.861]",
+        "description": null,
+        "apikey": "f7912170791a3cde59191bd9eb88b76c",
+        "status": "A",
+        "expiration": "2016-04-14T17:48:06+00:00",
+        "logging": "admini=FINE,buslog=FINE,depend=FINE,generl=FINE,persis=FINE,engine=FINE,resrcs=FINE,securi=FINE,sysdbg=FINE,ulogic=FINE",
+        "user_identifier": "demo",
+        "data": "username=demo",
+        "origin": "A",
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiKeys/2122",
+          "checksum": "A:5ac09c1d51119600"
+        }
+      },
+      {
+        "ident": 2148,
+        "ts": "2016-04-13T16:06:16+00:00",
+        "name": "Temp AuthToken for demo [2016-04-13 20:06:15.571]",
+        "description": null,
+        "apikey": "301c97cece58d8da7c37c484b5b8bd90",
+        "status": "A",
+        "expiration": "2016-04-14T20:06:16+00:00",
+        "logging": "admini=FINE,buslog=FINE,depend=FINE,generl=FINE,persis=FINE,engine=FINE,resrcs=FINE,securi=FINE,sysdbg=FINE,ulogic=FINE",
+        "user_identifier": "demo",
+        "data": "username=demo",
+        "origin": "A",
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiKeys/2148",
+          "checksum": "A:91767f06e3a886b2"
+        }
+      },
+      {
+        "ident": 2149,
+        "ts": "2016-04-13T16:06:16+00:00",
+        "name": "Temp AuthToken for demo [2016-04-13 20:06:15.571]",
+        "description": null,
+        "apikey": "75c9237b996282d7dd998ddcdfd1c51a",
+        "status": "A",
+        "expiration": "2016-04-14T20:06:16+00:00",
+        "logging": "admini=FINE,buslog=FINE,depend=FINE,generl=FINE,persis=FINE,engine=FINE,resrcs=FINE,securi=FINE,sysdbg=FINE,ulogic=FINE",
+        "user_identifier": "demo",
+        "data": "username=demo",
+        "origin": "A",
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiKeys/2149",
+          "checksum": "A:4d01ef0b0d5da1d1"
+        }
+      },
+      {
+        "ident": 2151,
+        "ts": "2016-04-13T16:36:31+00:00",
+        "name": "Temp AuthToken for demo [2016-04-13 20:36:31.604]",
+        "description": null,
+        "apikey": "0ecc34f75c150ca0298e96873cbbbb93",
+        "status": "A",
+        "expiration": "2016-04-14T20:36:32+00:00",
+        "logging": "admini=FINE,buslog=FINE,depend=FINE,generl=FINE,persis=FINE,engine=FINE,resrcs=FINE,securi=FINE,sysdbg=FINE,ulogic=FINE",
+        "user_identifier": "demo",
+        "data": "username=demo",
+        "origin": "A",
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiKeys/2151",
+          "checksum": "A:a8ed9f51da29d1c5"
+        }
+      },
+      {
+        "ident": 2152,
+        "ts": "2016-04-13T16:36:31+00:00",
+        "name": "Temp AuthToken for demo [2016-04-13 20:36:31.604]",
+        "description": null,
+        "apikey": "42b147b75d58bfe79fdc0796a9bf851b",
+        "status": "A",
+        "expiration": "2016-04-14T20:36:32+00:00",
+        "logging": "admini=FINE,buslog=FINE,depend=FINE,generl=FINE,persis=FINE,engine=FINE,resrcs=FINE,securi=FINE,sysdbg=FINE,ulogic=FINE",
+        "user_identifier": "demo",
+        "data": "username=demo",
+        "origin": "A",
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiKeys/2152",
+          "checksum": "A:5a3bfab2893d143a"
+        }
+      },
+      {
+        "ident": 2155,
+        "ts": "2016-04-13T17:20:06+00:00",
+        "name": "Temp AuthToken for demo [2016-04-13 21:20:06.549]",
+        "description": null,
+        "apikey": "cb8c5c6fc085a767c17043612aedb620",
+        "status": "A",
+        "expiration": "2016-04-14T21:20:07+00:00",
+        "logging": "admini=FINE,buslog=FINE,depend=FINE,generl=FINE,persis=FINE,engine=FINE,resrcs=FINE,securi=FINE,sysdbg=FINE,ulogic=FINE",
+        "user_identifier": "demo",
+        "data": "username=demo",
+        "origin": "A",
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiKeys/2155",
+          "checksum": "A:bfa76a7c215ebb0d"
+        }
+      },
+      {
+        "ident": 2156,
+        "ts": "2016-04-13T17:20:07+00:00",
+        "name": "Temp AuthToken for demo [2016-04-13 21:20:07.180]",
+        "description": null,
+        "apikey": "19ca073f8bd0005e5a7d893f30a76513",
+        "status": "A",
+        "expiration": "2016-04-14T21:20:07+00:00",
+        "logging": "admini=FINE,buslog=FINE,depend=FINE,generl=FINE,persis=FINE,engine=FINE,resrcs=FINE,securi=FINE,sysdbg=FINE,ulogic=FINE",
+        "user_identifier": "demo",
+        "data": "username=demo",
+        "origin": "A",
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiKeys/2156",
+          "checksum": "A:2f40f5e9933e032b"
+        }
+      },
+      {
+        "ident": 2157,
+        "ts": "2016-04-13T17:23:34+00:00",
+        "name": "Temp AuthToken for demo [2016-04-13 21:23:34.860]",
+        "description": null,
+        "apikey": "c8a61f0de102f4d60f142e2c8512dc4a",
+        "status": "A",
+        "expiration": "2016-04-14T21:23:35+00:00",
+        "logging": "admini=FINE,buslog=FINE,depend=FINE,generl=FINE,persis=FINE,engine=FINE,resrcs=FINE,securi=FINE,sysdbg=FINE,ulogic=FINE",
+        "user_identifier": "demo",
+        "data": "username=demo",
+        "origin": "A",
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiKeys/2157",
+          "checksum": "A:50452b211d6ba941"
+        }
+      },
+      {
+        "ident": 2158,
+        "ts": "2016-04-13T17:23:35+00:00",
+        "name": "Temp AuthToken for demo [2016-04-13 21:23:35.601]",
+        "description": null,
+        "apikey": "6663369e858992192896225b30a39668",
+        "status": "A",
+        "expiration": "2016-04-14T21:23:36+00:00",
+        "logging": "admini=FINE,buslog=FINE,depend=FINE,generl=FINE,persis=FINE,engine=FINE,resrcs=FINE,securi=FINE,sysdbg=FINE,ulogic=FINE",
+        "user_identifier": "demo",
+        "data": "username=demo",
+        "origin": "A",
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.ApiKeys/2158",
+          "checksum": "A:dcc8339011857c9e"
+        }
+      }
+    ],
+    "Roles": [
+      {
+        "ident": 2015,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "name": "APIRules",
+        "description": null,
+        "default_permission": "RIU",
+        "default_apivisibility": "TRM",
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Roles/2015",
+          "checksum": "A:ecfab2a95f33a80b"
+        },
+        "TablePermissions": [
+        ],
+        "PermissionData": [
+        ],
+        "ApiKeyRoles": [
+          {
+            "ident": 2053,
+            "ts": "2016-04-12T11:14:15+00:00",
+            "apikey_ident": 2052,
+            "role_ident": 2015,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Roles.ApiKeyRoles/2053",
+              "checksum": "A:01cb85bc3c6aa80d"
+            }
+          }
+        ],
+        "ApiVisibility": [
+        ]
+      },
+      {
+        "ident": 2016,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "name": "App owner",
+        "description": "Full permissions on the entire project",
+        "default_permission": "A",
+        "default_apivisibility": "TVPRM",
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Roles/2016",
+          "checksum": "A:589da34494e64fff"
+        },
+        "TablePermissions": [
+        ],
+        "PermissionData": [
+        ],
+        "ApiKeyRoles": [
+          {
+            "ident": 2054,
+            "ts": "2016-04-12T11:14:15+00:00",
+            "apikey_ident": 2051,
+            "role_ident": 2016,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Roles.ApiKeyRoles/2054",
+              "checksum": "A:b3b96f354b032c8f"
+            }
+          },
+          {
+            "ident": 2123,
+            "ts": "2016-04-13T13:47:50+00:00",
+            "apikey_ident": 2120,
+            "role_ident": 2016,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Roles.ApiKeyRoles/2123",
+              "checksum": "A:8f4e4023c880caf8"
+            }
+          },
+          {
+            "ident": 2124,
+            "ts": "2016-04-13T13:47:50+00:00",
+            "apikey_ident": 2121,
+            "role_ident": 2016,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Roles.ApiKeyRoles/2124",
+              "checksum": "A:188df013ce69201c"
+            }
+          },
+          {
+            "ident": 2125,
+            "ts": "2016-04-13T13:48:05+00:00",
+            "apikey_ident": 2122,
+            "role_ident": 2016,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Roles.ApiKeyRoles/2125",
+              "checksum": "A:11cf93eebf946351"
+            }
+          },
+          {
+            "ident": 2151,
+            "ts": "2016-04-13T16:06:16+00:00",
+            "apikey_ident": 2149,
+            "role_ident": 2016,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Roles.ApiKeyRoles/2151",
+              "checksum": "A:2f481617008b5d83"
+            }
+          },
+          {
+            "ident": 2152,
+            "ts": "2016-04-13T16:06:16+00:00",
+            "apikey_ident": 2148,
+            "role_ident": 2016,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Roles.ApiKeyRoles/2152",
+              "checksum": "A:a45dd68bc0fb4ff9"
+            }
+          },
+          {
+            "ident": 2154,
+            "ts": "2016-04-13T16:36:31+00:00",
+            "apikey_ident": 2151,
+            "role_ident": 2016,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Roles.ApiKeyRoles/2154",
+              "checksum": "A:b9c2871f6398d0ca"
+            }
+          },
+          {
+            "ident": 2155,
+            "ts": "2016-04-13T16:36:31+00:00",
+            "apikey_ident": 2152,
+            "role_ident": 2016,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Roles.ApiKeyRoles/2155",
+              "checksum": "A:7e6eb51e376964e2"
+            }
+          },
+          {
+            "ident": 2158,
+            "ts": "2016-04-13T17:20:06+00:00",
+            "apikey_ident": 2155,
+            "role_ident": 2016,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Roles.ApiKeyRoles/2158",
+              "checksum": "A:bfae62425106bc67"
+            }
+          },
+          {
+            "ident": 2159,
+            "ts": "2016-04-13T17:20:07+00:00",
+            "apikey_ident": 2156,
+            "role_ident": 2016,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Roles.ApiKeyRoles/2159",
+              "checksum": "A:a335dc75d8e9dcfc"
+            }
+          },
+          {
+            "ident": 2160,
+            "ts": "2016-04-13T17:23:34+00:00",
+            "apikey_ident": 2157,
+            "role_ident": 2016,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Roles.ApiKeyRoles/2160",
+              "checksum": "A:fedd25c85afbab56"
+            }
+          },
+          {
+            "ident": 2161,
+            "ts": "2016-04-13T17:23:35+00:00",
+            "apikey_ident": 2158,
+            "role_ident": 2016,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Roles.ApiKeyRoles/2161",
+              "checksum": "A:d2a9d02975b04a7c"
+            }
+          }
+        ],
+        "ApiVisibility": [
+        ]
+      }
+    ],
+    "Users": [
+      {
+        "ident": 2004,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "name": "demo",
+        "fullname": "Demo user",
+        "email": "admin@espressologic.com",
+        "status": "A",
+        "roles": "App owner,",
+        "data": "",
+        "comments": null,
+        "apikey_lifespan": null,
+        "password_hash": "q1qvRqRaDnBaHMUy9PCo9c802rNn+EHl/LvXqVkUVARD3yte2q1//uROpZUgj9UcPXNRHK/PLTDenvK7/qNxyw==",
+        "password_salt": "znUAWKeU6jbQUJ6x0sysRk+bGgqVwPfsb67KxAEg",
+        "project_ident": 2006,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Users/2004",
+          "checksum": "A:0accd95c043df0cf"
+        }
+      }
+    ],
+    "Handlers": [
+    ],
+    "EventHandlers": [
+    ],
+    "Relationships": [
+    ],
+    "Applications": [
+      {
+        "ident": 2001,
+        "ts": "2016-04-12T11:14:15+00:00",
+        "name": "Default app",
+        "description": null,
+        "project_ident": 2006,
+        "default_language": "eng",
+        "skin_ident": null,
+        "@metadata": {
+          "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Applications/2001",
+          "checksum": "A:9289917b7b347c20"
+        },
+        "ApplicationOptions": [
+        ],
+        "ApplicationSkins": [
+        ],
+        "ApplicationTableSettings": [
+          {
+            "ident": 2007,
+            "ts": "2016-04-13T09:06:27+00:00",
+            "table_name": "main:csvheader",
+            "object_type": "table",
+            "json": "{\"name\":\"main:csvheader\",\"alias\":\"main:csvheader\",\"columnFormats\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":171.24818577648767,\"$$hashKey\":\"10E\"},\"csv_ident\":{\"name\":\"csv_ident\",\"alias\":\"Csv Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"csv_ident\",\"width\":174.25253991291729,\"$$hashKey\":\"10F\"},\"importDate\":{\"name\":\"importDate\",\"alias\":\"Import Date\",\"type\":\"DATE\",\"generic_type\":\"date\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"importDate\",\"width\":344.49927431059507,\"$$hashKey\":\"10K\"},\"filename\":{\"name\":\"filename\",\"alias\":\"Filename\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"filename\",\"$$hashKey\":\"10H\"},\"content\":{\"name\":\"content\",\"alias\":\"Content\",\"type\":\"BLOB\",\"generic_type\":\"binary\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"content\",\"$$hashKey\":\"10I\"},\"processCSVHeaderFlag\":{\"name\":\"processCSVHeaderFlag\",\"alias\":\"Process CSVHeader Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"processCSVHeaderFlag\",\"$$hashKey\":\"10L\"},\"processCSVFlag\":{\"name\":\"processCSVFlag\",\"alias\":\"Process CSVFlag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"processCSVFlag\",\"$$hashKey\":\"102\"},\"processTableFlag\":{\"name\":\"processTableFlag\",\"alias\":\"Process Table Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"processTableFlag\",\"$$hashKey\":\"104\"},\"countDetailRows\":{\"name\":\"countDetailRows\",\"alias\":\"Count Detail Rows\",\"type\":\"INTEGER\",\"generic_type\":\"number\",\"is_editable\":false,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"countDetailRows\",\"$$hashKey\":\"10M\"},\"genTableFlag\":{\"name\":\"genTableFlag\",\"alias\":\"Gen Table Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"genTableFlag\",\"$$hashKey\":\"10J\"},\"loadFileContent\":{\"name\":\"loadFileContent\",\"alias\":\"Load File Content\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"loadFileContent\"}},\"gridColumns\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":171.24818577648767,\"$$hashKey\":\"10E\"},\"csv_ident\":{\"name\":\"csv_ident\",\"alias\":\"Csv Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"csv_ident\",\"width\":174.25253991291729,\"$$hashKey\":\"10F\"},\"importDate\":{\"name\":\"importDate\",\"alias\":\"Import Date\",\"type\":\"DATE\",\"generic_type\":\"date\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"importDate\",\"width\":344.49927431059507,\"$$hashKey\":\"10K\"}},\"scalarColumns\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":171.24818577648767,\"$$hashKey\":\"10E\"},\"csv_ident\":{\"name\":\"csv_ident\",\"alias\":\"Csv Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"csv_ident\",\"width\":174.25253991291729,\"$$hashKey\":\"10F\"},\"fk_definiiton_header/tableName\":{\"name\":\"tableName\",\"alias\":\"Table Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definiiton_header.tableName\",\"parentRole\":\"fk_definiiton_header\",\"$$hashKey\":\"10G\"},\"filename\":{\"name\":\"filename\",\"alias\":\"Filename\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"filename\",\"$$hashKey\":\"10H\"},\"content\":{\"name\":\"content\",\"alias\":\"Content\",\"type\":\"BLOB\",\"generic_type\":\"binary\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"content\",\"$$hashKey\":\"10I\"},\"genTableFlag\":{\"name\":\"genTableFlag\",\"alias\":\"Gen Table Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"genTableFlag\",\"$$hashKey\":\"10J\"},\"importDate\":{\"name\":\"importDate\",\"alias\":\"Import Date\",\"type\":\"DATE\",\"generic_type\":\"date\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"importDate\",\"width\":344.49927431059507,\"$$hashKey\":\"10K\"},\"processCSVHeaderFlag\":{\"name\":\"processCSVHeaderFlag\",\"alias\":\"Process CSVHeader Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"processCSVHeaderFlag\",\"$$hashKey\":\"10L\"},\"countDetailRows\":{\"name\":\"countDetailRows\",\"alias\":\"Count Detail Rows\",\"type\":\"INTEGER\",\"generic_type\":\"number\",\"is_editable\":false,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"countDetailRows\",\"$$hashKey\":\"10M\"}},\"parentSettings\":{\"fk_csvdefiniton_header\":{\"name\":\"fk_csvdefiniton_header\",\"alias\":\"fk_csvdefiniton_header\",\"columnFormats\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_csvdefiniton_header.ident\",\"parentRole\":\"fk_csvdefiniton_header\"},\"csvMapName\":{\"name\":\"csvMapName\",\"alias\":\"Csv Map Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_csvdefiniton_header.csvMapName\",\"parentRole\":\"fk_csvdefiniton_header\",\"width\":394.9440866757121},\"tableName\":{\"name\":\"tableName\",\"alias\":\"Table Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_csvdefiniton_header.tableName\",\"parentRole\":\"fk_csvdefiniton_header\"},\"Description\":{\"name\":\"Description\",\"alias\":\"Description\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_csvdefiniton_header.Description\",\"parentRole\":\"fk_csvdefiniton_header\"}}},\"fk_definiiton_header\":{\"name\":\"fk_definiiton_header\",\"alias\":\"fk_definiiton_header\",\"columnFormats\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definiiton_header.ident\",\"parentRole\":\"fk_definiiton_header\"},\"csvMapName\":{\"name\":\"csvMapName\",\"alias\":\"Csv Map Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definiiton_header.csvMapName\",\"parentRole\":\"fk_definiiton_header\"},\"tableName\":{\"name\":\"tableName\",\"alias\":\"Table Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definiiton_header.tableName\",\"parentRole\":\"fk_definiiton_header\",\"$$hashKey\":\"10G\"},\"Description\":{\"name\":\"Description\",\"alias\":\"Description\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definiiton_header.Description\",\"parentRole\":\"fk_definiiton_header\"},\"firstRowHasHeader\":{\"name\":\"firstRowHasHeader\",\"alias\":\"First Row Has Header\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definiiton_header.firstRowHasHeader\",\"parentRole\":\"fk_definiiton_header\"},\"haltOnFirstError\":{\"name\":\"haltOnFirstError\",\"alias\":\"Halt On First Error\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definiiton_header.haltOnFirstError\",\"parentRole\":\"fk_definiiton_header\"},\"columnDelim\":{\"name\":\"columnDelim\",\"alias\":\"Column Delim\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definiiton_header.columnDelim\",\"parentRole\":\"fk_definiiton_header\"},\"prefix\":{\"name\":\"prefix\",\"alias\":\"Prefix\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definiiton_header.prefix\",\"parentRole\":\"fk_definiiton_header\"},\"project_url\":{\"name\":\"project_url\",\"alias\":\"Project Url\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definiiton_header.project_url\",\"parentRole\":\"fk_definiiton_header\"},\"useColumnMap\":{\"name\":\"useColumnMap\",\"alias\":\"Use Column Map\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"useColumnMap\"}}}},\"defaultTable\":false,\"windows\":[\"main\",\"child\",\"form\"],\"childrenSettings\":{\"csvimporterrorsList\":{\"name\":\"csvimporterrorsList\",\"tableName\":\"main:csvimporterrors\",\"alias\":\"Errors\",\"displayed\":true,\"selected\":false,\"columnFormats\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":74.55555555555556},\"header_ident\":{\"name\":\"header_ident\",\"alias\":\"Header Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"header_ident\"},\"ErrorMessage\":{\"name\":\"ErrorMessage\",\"alias\":\"Error Message\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ErrorMessage\",\"width\":298.22222222222223},\"RowContent\":{\"name\":\"RowContent\",\"alias\":\"Row Content\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"RowContent\",\"width\":298.22222222222223},\"rowIndex\":{\"name\":\"rowIndex\",\"alias\":\"Row Index\",\"type\":\"INTEGER\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"rowIndex\"}},\"downloadable\":false,\"gridColumns\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":74.55555555555556},\"ErrorMessage\":{\"name\":\"ErrorMessage\",\"alias\":\"Error Message\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ErrorMessage\",\"width\":298.22222222222223},\"RowContent\":{\"name\":\"RowContent\",\"alias\":\"Row Content\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"RowContent\",\"width\":298.22222222222223}},\"parentSettings\":{\"fk_header_errors\":{\"alias\":\"main:csvheader\",\"columnFormats\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_header_errors.ident\",\"parentRole\":\"fk_header_errors\"},\"csv_ident\":{\"name\":\"csv_ident\",\"alias\":\"Csv Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_header_errors.csv_ident\",\"parentRole\":\"fk_header_errors\"},\"importDate\":{\"name\":\"importDate\",\"alias\":\"Import Date\",\"type\":\"DATE\",\"generic_type\":\"date\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_header_errors.importDate\",\"parentRole\":\"fk_header_errors\"},\"filename\":{\"name\":\"filename\",\"alias\":\"Filename\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_header_errors.filename\",\"parentRole\":\"fk_header_errors\"},\"content\":{\"name\":\"content\",\"alias\":\"Content\",\"type\":\"BLOB\",\"generic_type\":\"binary\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_header_errors.content\",\"parentRole\":\"fk_header_errors\"},\"processCSVHeaderFlag\":{\"name\":\"processCSVHeaderFlag\",\"alias\":\"Process CSVHeader Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_header_errors.processCSVHeaderFlag\",\"parentRole\":\"fk_header_errors\"},\"processCSVFlag\":{\"name\":\"processCSVFlag\",\"alias\":\"Process CSVFlag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_header_errors.processCSVFlag\",\"parentRole\":\"fk_header_errors\"},\"processTableFlag\":{\"name\":\"processTableFlag\",\"alias\":\"Process Table Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_header_errors.processTableFlag\",\"parentRole\":\"fk_header_errors\"},\"genTableFlag\":{\"name\":\"genTableFlag\",\"alias\":\"Gen Table Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_header_errors.genTableFlag\",\"parentRole\":\"fk_header_errors\"},\"countDetailRows\":{\"name\":\"countDetailRows\",\"alias\":\"Count Detail Rows\",\"type\":\"INTEGER\",\"generic_type\":\"number\",\"is_editable\":false,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_header_errors.countDetailRows\",\"parentRole\":\"fk_header_errors\"},\"loadFileContent\":{\"name\":\"loadFileContent\",\"alias\":\"Load File Content\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"loadFileContent\"}}}},\"groups\":[],\"labelPlacement\":\"left\"}},\"groups\":[{\"title\":\"\",\"columns\":[\"ident\",\"csv_ident\",\"fk_definiiton_header/tableName\",\"filename\",\"content\",\"genTableFlag\",\"firstRowHasHeader\",\"columnSeparator\",\"importDate\",\"processCSVHeaderFlag\",\"countDetailRows\"],\"$$hashKey\":\"10I\"}],\"labelPlacement\":\"Left\"}",
+            "app_ident": 2001,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Applications.ApplicationTableSettings/2007",
+              "checksum": "A:374accece0459375"
+            }
+          },
+          {
+            "ident": 2008,
+            "ts": "2016-04-12T11:14:15+00:00",
+            "table_name": "main:csvdetails",
+            "object_type": "table",
+            "json": "{\"name\":\"main:csvdetails\",\"alias\":\"main:csvdetails\",\"columnFormats\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":115,\"$$hashKey\":\"2I7\"},\"header_ident\":{\"name\":\"header_ident\",\"alias\":\"Header Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"header_ident\",\"$$hashKey\":\"2I8\"},\"row\":{\"name\":\"row\",\"alias\":\"Row\",\"type\":\"INTEGER\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"row\",\"width\":115,\"$$hashKey\":\"2I9\"},\"columnName\":{\"name\":\"columnName\",\"alias\":\"Column Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"columnName\",\"$$hashKey\":\"2IA\"},\"value\":{\"name\":\"value\",\"alias\":\"Value\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"value\",\"$$hashKey\":\"2IB\"},\"altForeignKey\":{\"name\":\"altForeignKey\",\"alias\":\"Alt Foreign Key\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"altForeignKey\",\"$$hashKey\":\"2IC\"}},\"gridColumns\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":115,\"$$hashKey\":\"2I7\"},\"header_ident\":{\"name\":\"header_ident\",\"alias\":\"Header Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"header_ident\",\"$$hashKey\":\"2I8\"},\"row\":{\"name\":\"row\",\"alias\":\"Row\",\"type\":\"INTEGER\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"row\",\"width\":115,\"$$hashKey\":\"2I9\"}},\"scalarColumns\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":115,\"$$hashKey\":\"2I7\"},\"header_ident\":{\"name\":\"header_ident\",\"alias\":\"Header Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"header_ident\",\"$$hashKey\":\"2I8\"},\"row\":{\"name\":\"row\",\"alias\":\"Row\",\"type\":\"INTEGER\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"row\",\"width\":115,\"$$hashKey\":\"2I9\"},\"columnName\":{\"name\":\"columnName\",\"alias\":\"Column Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"columnName\",\"$$hashKey\":\"2IA\"},\"value\":{\"name\":\"value\",\"alias\":\"Value\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"value\",\"$$hashKey\":\"2IB\"},\"altForeignKey\":{\"name\":\"altForeignKey\",\"alias\":\"Alt Foreign Key\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"altForeignKey\",\"$$hashKey\":\"2IC\"}},\"parentSettings\":{\"fk_CSVDetails_Header\":{\"name\":\"fk_CSVDetails_Header\",\"alias\":\"fk_CSVDetails_Header\",\"columnFormats\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_CSVDetails_Header.ident\",\"parentRole\":\"fk_CSVDetails_Header\"},\"csv_ident\":{\"name\":\"csv_ident\",\"alias\":\"Csv Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_CSVDetails_Header.csv_ident\",\"parentRole\":\"fk_CSVDetails_Header\"},\"importDate\":{\"name\":\"importDate\",\"alias\":\"Import Date\",\"type\":\"DATE\",\"generic_type\":\"date\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_CSVDetails_Header.importDate\",\"parentRole\":\"fk_CSVDetails_Header\"},\"filename\":{\"name\":\"filename\",\"alias\":\"Filename\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_CSVDetails_Header.filename\",\"parentRole\":\"fk_CSVDetails_Header\",\"width\":460},\"content\":{\"name\":\"content\",\"alias\":\"Content\",\"type\":\"BLOB\",\"generic_type\":\"binary\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_CSVDetails_Header.content\",\"parentRole\":\"fk_CSVDetails_Header\"},\"processCSVHeaderFlag\":{\"name\":\"processCSVHeaderFlag\",\"alias\":\"Process CSVHeader Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_CSVDetails_Header.processCSVHeaderFlag\",\"parentRole\":\"fk_CSVDetails_Header\"},\"processCSVFlag\":{\"name\":\"processCSVFlag\",\"alias\":\"Process CSVFlag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_CSVDetails_Header.processCSVFlag\",\"parentRole\":\"fk_CSVDetails_Header\"},\"processTableFlag\":{\"name\":\"processTableFlag\",\"alias\":\"Process Table Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_CSVDetails_Header.processTableFlag\",\"parentRole\":\"fk_CSVDetails_Header\"},\"columnSeparator\":{\"name\":\"columnSeparator\",\"alias\":\"Column Separator\",\"type\":\"CHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_CSVDetails_Header.columnSeparator\",\"parentRole\":\"fk_CSVDetails_Header\"},\"countDetailRows\":{\"name\":\"countDetailRows\",\"alias\":\"Count Detail Rows\",\"type\":\"INTEGER\",\"generic_type\":\"number\",\"is_editable\":false,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_CSVDetails_Header.countDetailRows\",\"parentRole\":\"fk_CSVDetails_Header\"},\"asDDL\":{\"name\":\"asDDL\",\"alias\":\"As DDL\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_CSVDetails_Header.asDDL\",\"parentRole\":\"fk_CSVDetails_Header\"}}},\"fk_detail_header\":{\"name\":\"fk_detail_header\",\"alias\":\"fk_detail_header\",\"columnFormats\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_detail_header.ident\",\"parentRole\":\"fk_detail_header\"},\"csv_ident\":{\"name\":\"csv_ident\",\"alias\":\"Csv Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_detail_header.csv_ident\",\"parentRole\":\"fk_detail_header\"},\"importDate\":{\"name\":\"importDate\",\"alias\":\"Import Date\",\"type\":\"DATE\",\"generic_type\":\"date\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_detail_header.importDate\",\"parentRole\":\"fk_detail_header\"},\"filename\":{\"name\":\"filename\",\"alias\":\"Filename\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_detail_header.filename\",\"parentRole\":\"fk_detail_header\"},\"content\":{\"name\":\"content\",\"alias\":\"Content\",\"type\":\"BLOB\",\"generic_type\":\"binary\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_detail_header.content\",\"parentRole\":\"fk_detail_header\"},\"processCSVHeaderFlag\":{\"name\":\"processCSVHeaderFlag\",\"alias\":\"Process CSVHeader Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_detail_header.processCSVHeaderFlag\",\"parentRole\":\"fk_detail_header\"},\"processCSVFlag\":{\"name\":\"processCSVFlag\",\"alias\":\"Process CSVFlag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_detail_header.processCSVFlag\",\"parentRole\":\"fk_detail_header\"},\"processTableFlag\":{\"name\":\"processTableFlag\",\"alias\":\"Process Table Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_detail_header.processTableFlag\",\"parentRole\":\"fk_detail_header\"},\"genTableFlag\":{\"name\":\"genTableFlag\",\"alias\":\"Gen Table Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_detail_header.genTableFlag\",\"parentRole\":\"fk_detail_header\"},\"countDetailRows\":{\"name\":\"countDetailRows\",\"alias\":\"Count Detail Rows\",\"type\":\"INTEGER\",\"generic_type\":\"number\",\"is_editable\":false,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_detail_header.countDetailRows\",\"parentRole\":\"fk_detail_header\"}}}},\"defaultTable\":false,\"windows\":[\"main\",\"form\"],\"childrenSettings\":{},\"groups\":[{\"title\":\"\",\"columns\":[\"ident\",\"header_ident\",\"row\",\"columnName\",\"value\",\"altForeignKey\"],\"$$hashKey\":\"2HR\"}],\"labelPlacement\":\"Left\"}",
+            "app_ident": 2001,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Applications.ApplicationTableSettings/2008",
+              "checksum": "A:43144d25e0c18144"
+            }
+          },
+          {
+            "ident": 2009,
+            "ts": "2016-04-12T11:14:15+00:00",
+            "table_name": "main:columnmap",
+            "object_type": "table",
+            "json": "{\"name\":\"main:columnmap\",\"alias\":\"main:columnmap\",\"columnFormats\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":48.24994666097717,\"$$hashKey\":\"040\"},\"CSVAttrName\":{\"name\":\"CSVAttrName\",\"alias\":\"CSVAttr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"CSVAttrName\",\"width\":194.26952208235545,\"$$hashKey\":\"041\"},\"TableAttrName\":{\"name\":\"TableAttrName\",\"alias\":\"Table Attr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"TableAttrName\",\"width\":194.26952208235545,\"$$hashKey\":\"042\"},\"AttrDataType\":{\"name\":\"AttrDataType\",\"alias\":\"Attr Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"AttrDataType\",\"$$hashKey\":\"043\"},\"header_ident\":{\"name\":\"header_ident\",\"alias\":\"Header Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"header_ident\",\"$$hashKey\":\"044\"},\"isKeyAttr\":{\"name\":\"isKeyAttr\",\"alias\":\"Is Key Attr\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"isKeyAttr\",\"$$hashKey\":\"045\"},\"isNullable\":{\"name\":\"isNullable\",\"alias\":\"Is Nullable\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"isNullable\",\"$$hashKey\":\"046\"},\"dbDataType\":{\"name\":\"dbDataType\",\"alias\":\"Db Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"dbDataType\",\"$$hashKey\":\"047\",\"width\":253.21100917431193}},\"gridColumns\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":48.24994666097717,\"$$hashKey\":\"040\"},\"CSVAttrName\":{\"name\":\"CSVAttrName\",\"alias\":\"CSVAttr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"CSVAttrName\",\"width\":194.26952208235545,\"$$hashKey\":\"041\"},\"TableAttrName\":{\"name\":\"TableAttrName\",\"alias\":\"Table Attr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"TableAttrName\",\"width\":194.26952208235545,\"$$hashKey\":\"042\"},\"dbDataType\":{\"name\":\"dbDataType\",\"alias\":\"Db Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"dbDataType\",\"$$hashKey\":\"047\",\"width\":253.21100917431193}},\"scalarColumns\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":48.24994666097717,\"$$hashKey\":\"040\"},\"CSVAttrName\":{\"name\":\"CSVAttrName\",\"alias\":\"CSVAttr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"CSVAttrName\",\"width\":194.26952208235545,\"$$hashKey\":\"041\"},\"TableAttrName\":{\"name\":\"TableAttrName\",\"alias\":\"Table Attr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"TableAttrName\",\"width\":194.26952208235545,\"$$hashKey\":\"042\"},\"AttrDataType\":{\"name\":\"AttrDataType\",\"alias\":\"Attr Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"AttrDataType\",\"$$hashKey\":\"043\"},\"header_ident\":{\"name\":\"header_ident\",\"alias\":\"Header Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"header_ident\",\"$$hashKey\":\"044\"},\"isKeyAttr\":{\"name\":\"isKeyAttr\",\"alias\":\"Is Key Attr\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"isKeyAttr\",\"$$hashKey\":\"045\"},\"isNullable\":{\"name\":\"isNullable\",\"alias\":\"Is Nullable\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"isNullable\",\"$$hashKey\":\"046\"},\"dbDataType\":{\"name\":\"dbDataType\",\"alias\":\"Db Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"dbDataType\",\"$$hashKey\":\"047\",\"width\":253.21100917431193}},\"parentSettings\":{\"fk_columnmap_csvheader\":{\"name\":\"fk_columnmap_csvheader\",\"alias\":\"fk_columnmap_csvheader\",\"columnFormats\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_columnmap_csvheader.ident\",\"parentRole\":\"fk_columnmap_csvheader\"},\"csv_ident\":{\"name\":\"csv_ident\",\"alias\":\"Csv Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_columnmap_csvheader.csv_ident\",\"parentRole\":\"fk_columnmap_csvheader\"},\"importDate\":{\"name\":\"importDate\",\"alias\":\"Import Date\",\"type\":\"DATE\",\"generic_type\":\"date\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_columnmap_csvheader.importDate\",\"parentRole\":\"fk_columnmap_csvheader\"},\"filename\":{\"name\":\"filename\",\"alias\":\"Filename\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_columnmap_csvheader.filename\",\"parentRole\":\"fk_columnmap_csvheader\"},\"content\":{\"name\":\"content\",\"alias\":\"Content\",\"type\":\"BLOB\",\"generic_type\":\"binary\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_columnmap_csvheader.content\",\"parentRole\":\"fk_columnmap_csvheader\"},\"processCSVHeaderFlag\":{\"name\":\"processCSVHeaderFlag\",\"alias\":\"Process CSVHeader Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_columnmap_csvheader.processCSVHeaderFlag\",\"parentRole\":\"fk_columnmap_csvheader\"},\"processCSVFlag\":{\"name\":\"processCSVFlag\",\"alias\":\"Process CSVFlag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_columnmap_csvheader.processCSVFlag\",\"parentRole\":\"fk_columnmap_csvheader\"},\"processTableFlag\":{\"name\":\"processTableFlag\",\"alias\":\"Process Table Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_columnmap_csvheader.processTableFlag\",\"parentRole\":\"fk_columnmap_csvheader\"},\"columnSeparator\":{\"name\":\"columnSeparator\",\"alias\":\"Column Separator\",\"type\":\"CHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_columnmap_csvheader.columnSeparator\",\"parentRole\":\"fk_columnmap_csvheader\"},\"countDetailRows\":{\"name\":\"countDetailRows\",\"alias\":\"Count Detail Rows\",\"type\":\"INTEGER\",\"generic_type\":\"number\",\"is_editable\":false,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_columnmap_csvheader.countDetailRows\",\"parentRole\":\"fk_columnmap_csvheader\"},\"asDDL\":{\"name\":\"asDDL\",\"alias\":\"As DDL\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_columnmap_csvheader.asDDL\",\"parentRole\":\"fk_columnmap_csvheader\"}}},\"fk_ColumnMap_ValidDataTypes\":{\"name\":\"fk_ColumnMap_ValidDataTypes\",\"alias\":\"fk_ColumnMap_ValidDataTypes\",\"columnFormats\":{\"validDataTypes\":{\"name\":\"validDataTypes\",\"alias\":\"Valid Data Types\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.validDataTypes\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"},\"regex\":{\"name\":\"regex\",\"alias\":\"Regex\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.regex\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"},\"evalExpression\":{\"name\":\"evalExpression\",\"alias\":\"Eval Expression\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.evalExpression\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"},\"Comments\":{\"name\":\"Comments\",\"alias\":\"Comments\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.Comments\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"},\"dbDataType\":{\"name\":\"dbDataType\",\"alias\":\"Db Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.dbDataType\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"}}}},\"defaultTable\":false,\"windows\":[\"main\",\"child\",\"form\"],\"childrenSettings\":{},\"groups\":[],\"labelPlacement\":\"Left\"}",
+            "app_ident": 2001,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Applications.ApplicationTableSettings/2009",
+              "checksum": "A:6b4ebeef0d034183"
+            }
+          },
+          {
+            "ident": 2010,
+            "ts": "2016-04-12T11:14:15+00:00",
+            "table_name": "main:test",
+            "object_type": "table",
+            "json": "{\"name\":\"main:test\",\"alias\":\"main:test\",\"columnFormats\":{\"ROWID\":{\"name\":\"ROWID\",\"alias\":\"ROWID\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ROWID\",\"width\":46.95266272189349,\"$$hashKey\":\"49W\"},\"keycol\":{\"name\":\"keycol\",\"alias\":\"Keycol\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"keycol\",\"width\":187.81065088757396,\"$$hashKey\":\"49X\"},\"numbercol\":{\"name\":\"numbercol\",\"alias\":\"Numbercol\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"numbercol\",\"width\":46.95266272189349,\"$$hashKey\":\"49Y\"},\"moneycol\":{\"name\":\"moneycol\",\"alias\":\"Moneycol\",\"type\":\"DECIMAL\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":true,\"mask\":\"$0,0.00\",\"maskType\":\"numeric\",\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"moneycol\",\"$$hashKey\":\"49Z\",\"width\":40.828402366863905},\"datecol\":{\"name\":\"datecol\",\"alias\":\"Datecol\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"datecol\",\"$$hashKey\":\"4A0\",\"width\":163.31360946745562},\"boolcol\":{\"name\":\"boolcol\",\"alias\":\"Boolcol\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"boolcol\",\"$$hashKey\":\"4A1\",\"width\":40.828402366863905},\"coltext\":{\"name\":\"coltext\",\"alias\":\"Coltext\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"coltext\",\"$$hashKey\":\"4A2\",\"width\":163.31360946745562}},\"gridColumns\":{\"ROWID\":{\"name\":\"ROWID\",\"alias\":\"ROWID\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ROWID\",\"width\":46.95266272189349,\"$$hashKey\":\"49W\"},\"keycol\":{\"name\":\"keycol\",\"alias\":\"Keycol\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"keycol\",\"width\":187.81065088757396,\"$$hashKey\":\"49X\"},\"numbercol\":{\"name\":\"numbercol\",\"alias\":\"Numbercol\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"numbercol\",\"width\":46.95266272189349,\"$$hashKey\":\"49Y\"},\"moneycol\":{\"name\":\"moneycol\",\"alias\":\"Moneycol\",\"type\":\"DECIMAL\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":true,\"mask\":\"$0,0.00\",\"maskType\":\"numeric\",\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"moneycol\",\"$$hashKey\":\"49Z\",\"width\":40.828402366863905},\"datecol\":{\"name\":\"datecol\",\"alias\":\"Datecol\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"datecol\",\"$$hashKey\":\"4A0\",\"width\":163.31360946745562},\"boolcol\":{\"name\":\"boolcol\",\"alias\":\"Boolcol\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"boolcol\",\"$$hashKey\":\"4A1\",\"width\":40.828402366863905},\"coltext\":{\"name\":\"coltext\",\"alias\":\"Coltext\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"coltext\",\"$$hashKey\":\"4A2\",\"width\":163.31360946745562}},\"scalarColumns\":{\"ROWID\":{\"name\":\"ROWID\",\"alias\":\"ROWID\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ROWID\",\"width\":46.95266272189349,\"$$hashKey\":\"49W\"},\"keycol\":{\"name\":\"keycol\",\"alias\":\"Keycol\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"keycol\",\"width\":187.81065088757396,\"$$hashKey\":\"49X\"},\"numbercol\":{\"name\":\"numbercol\",\"alias\":\"Numbercol\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"numbercol\",\"width\":46.95266272189349,\"$$hashKey\":\"49Y\"},\"moneycol\":{\"name\":\"moneycol\",\"alias\":\"Moneycol\",\"type\":\"DECIMAL\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":true,\"mask\":\"$0,0.00\",\"maskType\":\"numeric\",\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"moneycol\",\"$$hashKey\":\"49Z\",\"width\":40.828402366863905},\"datecol\":{\"name\":\"datecol\",\"alias\":\"Datecol\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"datecol\",\"$$hashKey\":\"4A0\",\"width\":163.31360946745562},\"boolcol\":{\"name\":\"boolcol\",\"alias\":\"Boolcol\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"boolcol\",\"$$hashKey\":\"4A1\",\"width\":40.828402366863905},\"coltext\":{\"name\":\"coltext\",\"alias\":\"Coltext\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"coltext\",\"$$hashKey\":\"4A2\",\"width\":163.31360946745562}},\"parentSettings\":{},\"defaultTable\":false,\"windows\":[\"main\",\"child\",\"form\"],\"childrenSettings\":{},\"groups\":[],\"labelPlacement\":\"Left\"}",
+            "app_ident": 2001,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Applications.ApplicationTableSettings/2010",
+              "checksum": "A:bfeef2ed18f7b623"
+            }
+          },
+          {
+            "ident": 2011,
+            "ts": "2016-04-13T12:30:11+00:00",
+            "table_name": "main:csvcolumnmap",
+            "object_type": "table",
+            "json": "{\"name\":\"main:csvcolumnmap\",\"alias\":\"main:csvcolumnmap\",\"columnFormats\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":37.026871989834966,\"$$hashKey\":\"4R0\"},\"CSVAttrName\":{\"name\":\"CSVAttrName\",\"alias\":\"CSVAttr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"CSVAttrName\",\"width\":153.3143918329104,\"$$hashKey\":\"4R1\"},\"TableAttrName\":{\"name\":\"TableAttrName\",\"alias\":\"Table Attr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"TableAttrName\",\"width\":153.3143918329104,\"$$hashKey\":\"4R2\"},\"AttrDataType\":{\"name\":\"AttrDataType\",\"alias\":\"Attr Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"AttrDataType\",\"$$hashKey\":\"4R3\"},\"isKeyAttr\":{\"name\":\"isKeyAttr\",\"alias\":\"Is Key Attr\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"isKeyAttr\",\"$$hashKey\":\"4R4\"},\"isNullable\":{\"name\":\"isNullable\",\"alias\":\"Is Nullable\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"isNullable\",\"$$hashKey\":\"4R5\"},\"dbDataType\":{\"name\":\"dbDataType\",\"alias\":\"Db Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"dbDataType\",\"width\":275.4754754754755,\"$$hashKey\":\"4R6\"},\"colIndex\":{\"name\":\"colIndex\",\"alias\":\"Col Index\",\"type\":\"INTEGER\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"colIndex\",\"width\":68.86886886886887},\"def_ident\":{\"name\":\"def_ident\",\"alias\":\"Def Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"def_ident\"}},\"gridColumns\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":37.026871989834966,\"$$hashKey\":\"4R0\"},\"CSVAttrName\":{\"name\":\"CSVAttrName\",\"alias\":\"CSVAttr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"CSVAttrName\",\"width\":153.3143918329104,\"$$hashKey\":\"4R1\"},\"TableAttrName\":{\"name\":\"TableAttrName\",\"alias\":\"Table Attr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"TableAttrName\",\"width\":153.3143918329104,\"$$hashKey\":\"4R2\"},\"dbDataType\":{\"name\":\"dbDataType\",\"alias\":\"Db Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"dbDataType\",\"width\":275.4754754754755,\"$$hashKey\":\"4R6\"},\"colIndex\":{\"name\":\"colIndex\",\"alias\":\"Col Index\",\"type\":\"INTEGER\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"colIndex\",\"width\":68.86886886886887}},\"scalarColumns\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":37.026871989834966,\"$$hashKey\":\"4R0\"},\"CSVAttrName\":{\"name\":\"CSVAttrName\",\"alias\":\"CSVAttr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"CSVAttrName\",\"width\":153.3143918329104,\"$$hashKey\":\"4R1\"},\"TableAttrName\":{\"name\":\"TableAttrName\",\"alias\":\"Table Attr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"TableAttrName\",\"width\":153.3143918329104,\"$$hashKey\":\"4R2\"},\"AttrDataType\":{\"name\":\"AttrDataType\",\"alias\":\"Attr Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"AttrDataType\",\"$$hashKey\":\"4R3\"},\"isKeyAttr\":{\"name\":\"isKeyAttr\",\"alias\":\"Is Key Attr\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"isKeyAttr\",\"$$hashKey\":\"4R4\"},\"isNullable\":{\"name\":\"isNullable\",\"alias\":\"Is Nullable\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"isNullable\",\"$$hashKey\":\"4R5\"},\"dbDataType\":{\"name\":\"dbDataType\",\"alias\":\"Db Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"dbDataType\",\"width\":275.4754754754755,\"$$hashKey\":\"4R6\"},\"def_ident\":{\"name\":\"def_ident\",\"alias\":\"Def Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"def_ident\"}},\"parentSettings\":{\"fk_ColumnMap_ValidDataTypes\":{\"name\":\"fk_ColumnMap_ValidDataTypes\",\"alias\":\"fk_ColumnMap_ValidDataTypes\",\"columnFormats\":{\"validDataTypes\":{\"name\":\"validDataTypes\",\"alias\":\"Valid Data Types\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.validDataTypes\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"},\"regex\":{\"name\":\"regex\",\"alias\":\"Regex\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.regex\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"},\"evalExpression\":{\"name\":\"evalExpression\",\"alias\":\"Eval Expression\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.evalExpression\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"},\"Comments\":{\"name\":\"Comments\",\"alias\":\"Comments\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.Comments\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"},\"dbDataType\":{\"name\":\"dbDataType\",\"alias\":\"Db Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.dbDataType\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"}}},\"fk_colummMap_header\":{\"name\":\"fk_colummMap_header\",\"alias\":\"fk_colummMap_header\",\"columnFormats\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_colummMap_header.ident\",\"parentRole\":\"fk_colummMap_header\"},\"csv_ident\":{\"name\":\"csv_ident\",\"alias\":\"Csv Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_colummMap_header.csv_ident\",\"parentRole\":\"fk_colummMap_header\"},\"importDate\":{\"name\":\"importDate\",\"alias\":\"Import Date\",\"type\":\"DATE\",\"generic_type\":\"date\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_colummMap_header.importDate\",\"parentRole\":\"fk_colummMap_header\"},\"filename\":{\"name\":\"filename\",\"alias\":\"Filename\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_colummMap_header.filename\",\"parentRole\":\"fk_colummMap_header\"},\"content\":{\"name\":\"content\",\"alias\":\"Content\",\"type\":\"BLOB\",\"generic_type\":\"binary\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_colummMap_header.content\",\"parentRole\":\"fk_colummMap_header\"},\"processCSVHeaderFlag\":{\"name\":\"processCSVHeaderFlag\",\"alias\":\"Process CSVHeader Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_colummMap_header.processCSVHeaderFlag\",\"parentRole\":\"fk_colummMap_header\"},\"processCSVFlag\":{\"name\":\"processCSVFlag\",\"alias\":\"Process CSVFlag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_colummMap_header.processCSVFlag\",\"parentRole\":\"fk_colummMap_header\"},\"processTableFlag\":{\"name\":\"processTableFlag\",\"alias\":\"Process Table Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_colummMap_header.processTableFlag\",\"parentRole\":\"fk_colummMap_header\"},\"genTableFlag\":{\"name\":\"genTableFlag\",\"alias\":\"Gen Table Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_colummMap_header.genTableFlag\",\"parentRole\":\"fk_colummMap_header\"},\"countDetailRows\":{\"name\":\"countDetailRows\",\"alias\":\"Count Detail Rows\",\"type\":\"INTEGER\",\"generic_type\":\"number\",\"is_editable\":false,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_colummMap_header.countDetailRows\",\"parentRole\":\"fk_colummMap_header\"}}},\"fk_definition_columnmap\":{\"name\":\"fk_definition_columnmap\",\"alias\":\"fk_definition_columnmap\",\"columnFormats\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.ident\",\"parentRole\":\"fk_definition_columnmap\"},\"csvMapName\":{\"name\":\"csvMapName\",\"alias\":\"Csv Map Name\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.csvMapName\",\"parentRole\":\"fk_definition_columnmap\"},\"tableName\":{\"name\":\"tableName\",\"alias\":\"Table Name\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.tableName\",\"parentRole\":\"fk_definition_columnmap\"},\"Description\":{\"name\":\"Description\",\"alias\":\"Description\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.Description\",\"parentRole\":\"fk_definition_columnmap\"},\"firstRowHasHeader\":{\"name\":\"firstRowHasHeader\",\"alias\":\"First Row Has Header\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.firstRowHasHeader\",\"parentRole\":\"fk_definition_columnmap\"},\"haltOnFirstError\":{\"name\":\"haltOnFirstError\",\"alias\":\"Halt On First Error\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.haltOnFirstError\",\"parentRole\":\"fk_definition_columnmap\"},\"useColumnMap\":{\"name\":\"useColumnMap\",\"alias\":\"Use Column Map\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.useColumnMap\",\"parentRole\":\"fk_definition_columnmap\"},\"columnDelim\":{\"name\":\"columnDelim\",\"alias\":\"Column Delim\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.columnDelim\",\"parentRole\":\"fk_definition_columnmap\"},\"prefix\":{\"name\":\"prefix\",\"alias\":\"Prefix\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.prefix\",\"parentRole\":\"fk_definition_columnmap\"},\"project_url\":{\"name\":\"project_url\",\"alias\":\"Project Url\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.project_url\",\"parentRole\":\"fk_definition_columnmap\"}}}},\"defaultTable\":false,\"windows\":[\"main\",\"form\",\"child\"],\"childrenSettings\":{},\"groups\":[{\"title\":\"\",\"columns\":[\"ident\",\"CSVAttrName\",\"TableAttrName\",\"AttrDataType\",\"isKeyAttr\",\"isNullable\",\"dbDataType\",\"def_ident\"],\"$$hashKey\":\"4QG\"}],\"labelPlacement\":\"Left\"}",
+            "app_ident": 2001,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Applications.ApplicationTableSettings/2011",
+              "checksum": "A:41b13f10a24abbfc"
+            }
+          },
+          {
+            "ident": 2012,
+            "ts": "2016-04-13T08:59:24+00:00",
+            "table_name": "main:validdatatypes",
+            "object_type": "table",
+            "json": "{\"name\":\"main:validdatatypes\",\"alias\":\"main:validdatatypes\",\"columnFormats\":{\"validDataTypes\":{\"name\":\"validDataTypes\",\"alias\":\"Valid Data Types\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"validDataTypes\"},\"regex\":{\"name\":\"regex\",\"alias\":\"Regex\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"regex\"},\"evalExpression\":{\"name\":\"evalExpression\",\"alias\":\"Eval Expression\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"evalExpression\"},\"Comments\":{\"name\":\"Comments\",\"alias\":\"Comments\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"Comments\"},\"dbDataType\":{\"name\":\"dbDataType\",\"alias\":\"Db Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"dbDataType\"}},\"gridColumns\":{\"validDataTypes\":{\"name\":\"validDataTypes\",\"alias\":\"Valid Data Types\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"validDataTypes\"},\"regex\":{\"name\":\"regex\",\"alias\":\"Regex\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"regex\"},\"evalExpression\":{\"name\":\"evalExpression\",\"alias\":\"Eval Expression\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"evalExpression\"}},\"scalarColumns\":{\"validDataTypes\":{\"name\":\"validDataTypes\",\"alias\":\"Valid Data Types\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"validDataTypes\"},\"regex\":{\"name\":\"regex\",\"alias\":\"Regex\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"regex\"},\"evalExpression\":{\"name\":\"evalExpression\",\"alias\":\"Eval Expression\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"evalExpression\"},\"Comments\":{\"name\":\"Comments\",\"alias\":\"Comments\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"Comments\"},\"dbDataType\":{\"name\":\"dbDataType\",\"alias\":\"Db Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"dbDataType\"}},\"parentSettings\":{},\"defaultTable\":false,\"windows\":[\"main\",\"form\"],\"childrenSettings\":{\"csvcolumnmapList\":{\"name\":\"csvcolumnmapList\",\"tableName\":\"main:csvcolumnmap\",\"alias\":\"Csvcolumnmap\",\"displayed\":true,\"selected\":false,\"columnFormats\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\"},\"CSVAttrName\":{\"name\":\"CSVAttrName\",\"alias\":\"CSVAttr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"CSVAttrName\"},\"TableAttrName\":{\"name\":\"TableAttrName\",\"alias\":\"Table Attr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"TableAttrName\"},\"AttrDataType\":{\"name\":\"AttrDataType\",\"alias\":\"Attr Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"AttrDataType\"},\"isKeyAttr\":{\"name\":\"isKeyAttr\",\"alias\":\"Is Key Attr\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"isKeyAttr\"},\"isNullable\":{\"name\":\"isNullable\",\"alias\":\"Is Nullable\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"isNullable\"},\"dbDataType\":{\"name\":\"dbDataType\",\"alias\":\"Db Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"dbDataType\"},\"colIndex\":{\"name\":\"colIndex\",\"alias\":\"Col Index\",\"type\":\"INTEGER\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"colIndex\"},\"def_ident\":{\"name\":\"def_ident\",\"alias\":\"Def Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"def_ident\"}},\"downloadable\":false,\"gridColumns\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\"},\"CSVAttrName\":{\"name\":\"CSVAttrName\",\"alias\":\"CSVAttr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"CSVAttrName\"},\"TableAttrName\":{\"name\":\"TableAttrName\",\"alias\":\"Table Attr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"TableAttrName\"}},\"parentSettings\":{\"fk_ColumnMap_ValidDataTypes\":{\"alias\":\"main:validdatatypes\",\"columnFormats\":{\"validDataTypes\":{\"name\":\"validDataTypes\",\"alias\":\"Valid Data Types\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.validDataTypes\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"},\"regex\":{\"name\":\"regex\",\"alias\":\"Regex\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.regex\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"},\"evalExpression\":{\"name\":\"evalExpression\",\"alias\":\"Eval Expression\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.evalExpression\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"},\"Comments\":{\"name\":\"Comments\",\"alias\":\"Comments\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.Comments\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"},\"dbDataType\":{\"name\":\"dbDataType\",\"alias\":\"Db Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.dbDataType\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"}}}},\"groups\":[],\"labelPlacement\":\"left\"}},\"groups\":[],\"labelPlacement\":\"Left\"}",
+            "app_ident": 2001,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Applications.ApplicationTableSettings/2012",
+              "checksum": "A:9563dee3fb0597b0"
+            }
+          },
+          {
+            "ident": 2013,
+            "ts": "2016-04-13T13:39:28+00:00",
+            "table_name": "main:csvdefinition",
+            "object_type": "table",
+            "json": "{\"name\":\"main:csvdefinition\",\"alias\":\"main:csvdefinition\",\"columnFormats\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":74.21511627906976,\"$$hashKey\":\"0P4\"},\"csvMapName\":{\"name\":\"csvMapName\",\"alias\":\"Csv Map Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"csvMapName\",\"width\":307.8924418604651,\"$$hashKey\":\"0P5\"},\"tableName\":{\"name\":\"tableName\",\"alias\":\"Table Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"tableName\",\"width\":307.8924418604651,\"$$hashKey\":\"0P6\"},\"Description\":{\"name\":\"Description\",\"alias\":\"Description\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":\"smallTextarea\",\"maskType\":\"text\",\"extensionType\":null,\"eval\":[],\"dataSource\":\"Description\",\"$$hashKey\":\"0PD\"},\"firstRowHasHeader\":{\"name\":\"firstRowHasHeader\",\"alias\":\"First Row Has Header\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"firstRowHasHeader\",\"default\":\"1\",\"$$hashKey\":\"0P7\"},\"haltOnFirstError\":{\"name\":\"haltOnFirstError\",\"alias\":\"Halt On First Error\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"haltOnFirstError\",\"$$hashKey\":\"0P8\"},\"columnDelim\":{\"name\":\"columnDelim\",\"alias\":\"Column Delim\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":\"text\",\"extensionType\":null,\"eval\":[],\"dataSource\":\"columnDelim\",\"default\":\",\",\"$$hashKey\":\"0P9\"},\"prefix\":{\"name\":\"prefix\",\"alias\":\"Prefix\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"prefix\",\"$$hashKey\":\"0PC\"},\"project_url\":{\"name\":\"project_url\",\"alias\":\"Project Url\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"project_url\",\"$$hashKey\":\"0PB\"},\"useColumnMap\":{\"name\":\"useColumnMap\",\"alias\":\"Use Column Map\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"useColumnMap\",\"$$hashKey\":\"0PA\"}},\"gridColumns\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":74.21511627906976,\"$$hashKey\":\"0P4\"},\"csvMapName\":{\"name\":\"csvMapName\",\"alias\":\"Csv Map Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"csvMapName\",\"width\":307.8924418604651,\"$$hashKey\":\"0P5\"},\"tableName\":{\"name\":\"tableName\",\"alias\":\"Table Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"tableName\",\"width\":307.8924418604651,\"$$hashKey\":\"0P6\"}},\"scalarColumns\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":74.21511627906976,\"$$hashKey\":\"0P4\"},\"csvMapName\":{\"name\":\"csvMapName\",\"alias\":\"Csv Map Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"csvMapName\",\"width\":307.8924418604651,\"$$hashKey\":\"0P5\"},\"tableName\":{\"name\":\"tableName\",\"alias\":\"Table Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"tableName\",\"width\":307.8924418604651,\"$$hashKey\":\"0P6\"},\"firstRowHasHeader\":{\"name\":\"firstRowHasHeader\",\"alias\":\"First Row Has Header\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"firstRowHasHeader\",\"default\":\"1\",\"$$hashKey\":\"0P7\"},\"haltOnFirstError\":{\"name\":\"haltOnFirstError\",\"alias\":\"Halt On First Error\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"haltOnFirstError\",\"$$hashKey\":\"0P8\"},\"columnDelim\":{\"name\":\"columnDelim\",\"alias\":\"Column Delim\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":\"text\",\"extensionType\":null,\"eval\":[],\"dataSource\":\"columnDelim\",\"default\":\",\",\"$$hashKey\":\"0P9\"},\"useColumnMap\":{\"name\":\"useColumnMap\",\"alias\":\"Use Column Map\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"useColumnMap\",\"$$hashKey\":\"0PA\"},\"project_url\":{\"name\":\"project_url\",\"alias\":\"Project Url\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"project_url\",\"$$hashKey\":\"0PB\"},\"prefix\":{\"name\":\"prefix\",\"alias\":\"Prefix\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"prefix\",\"$$hashKey\":\"0PC\"},\"Description\":{\"name\":\"Description\",\"alias\":\"Description\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":\"smallTextarea\",\"maskType\":\"text\",\"extensionType\":null,\"eval\":[],\"dataSource\":\"Description\",\"$$hashKey\":\"0PD\"}},\"parentSettings\":{},\"defaultTable\":\"main:csvdefinition\",\"windows\":[\"main\",\"form\",\"child\"],\"childrenSettings\":{\"csvheaderList\":{\"name\":\"csvheaderList\",\"tableName\":\"main:csvheader\",\"alias\":\"Csvheader\",\"displayed\":true,\"selected\":false,\"columnFormats\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":128.00676532536653},\"csv_ident\":{\"name\":\"csv_ident\",\"alias\":\"Csv Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"csv_ident\"},\"importDate\":{\"name\":\"importDate\",\"alias\":\"Import Date\",\"type\":\"DATE\",\"generic_type\":\"date\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"importDate\",\"width\":256.01353065073306},\"filename\":{\"name\":\"filename\",\"alias\":\"Filename\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"filename\",\"width\":290.4161446275937},\"content\":{\"name\":\"content\",\"alias\":\"Content\",\"type\":\"BLOB\",\"generic_type\":\"binary\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"content\"},\"processCSVHeaderFlag\":{\"name\":\"processCSVHeaderFlag\",\"alias\":\"Process CSVHeader Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"processCSVHeaderFlag\"},\"processCSVFlag\":{\"name\":\"processCSVFlag\",\"alias\":\"Process CSVFlag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"processCSVFlag\"},\"processTableFlag\":{\"name\":\"processTableFlag\",\"alias\":\"Process Table Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"processTableFlag\"},\"genTableFlag\":{\"name\":\"genTableFlag\",\"alias\":\"Gen Table Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"genTableFlag\",\"width\":133.53909944524077},\"countDetailRows\":{\"name\":\"countDetailRows\",\"alias\":\"Count Detail Rows\",\"type\":\"INTEGER\",\"generic_type\":\"number\",\"is_editable\":false,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"countDetailRows\",\"width\":153.44060457865967},\"loadFileContent\":{\"name\":\"loadFileContent\",\"alias\":\"Load File Content\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"loadFileContent\"}},\"downloadable\":false,\"gridColumns\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":128.00676532536653},\"importDate\":{\"name\":\"importDate\",\"alias\":\"Import Date\",\"type\":\"DATE\",\"generic_type\":\"date\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"importDate\",\"width\":256.01353065073306},\"genTableFlag\":{\"name\":\"genTableFlag\",\"alias\":\"Gen Table Flag\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"genTableFlag\",\"width\":133.53909944524077},\"countDetailRows\":{\"name\":\"countDetailRows\",\"alias\":\"Count Detail Rows\",\"type\":\"INTEGER\",\"generic_type\":\"number\",\"is_editable\":false,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"countDetailRows\",\"width\":153.44060457865967}},\"parentSettings\":{\"fk_definiiton_header\":{\"alias\":\"main:csvdefinition\",\"columnFormats\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definiiton_header.ident\",\"parentRole\":\"fk_definiiton_header\"},\"csvMapName\":{\"name\":\"csvMapName\",\"alias\":\"Csv Map Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definiiton_header.csvMapName\",\"parentRole\":\"fk_definiiton_header\"},\"tableName\":{\"name\":\"tableName\",\"alias\":\"Table Name\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definiiton_header.tableName\",\"parentRole\":\"fk_definiiton_header\"},\"Description\":{\"name\":\"Description\",\"alias\":\"Description\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definiiton_header.Description\",\"parentRole\":\"fk_definiiton_header\"},\"firstRowHasHeader\":{\"name\":\"firstRowHasHeader\",\"alias\":\"First Row Has Header\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definiiton_header.firstRowHasHeader\",\"parentRole\":\"fk_definiiton_header\"},\"haltOnFirstError\":{\"name\":\"haltOnFirstError\",\"alias\":\"Halt On First Error\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definiiton_header.haltOnFirstError\",\"parentRole\":\"fk_definiiton_header\"},\"columnDelim\":{\"name\":\"columnDelim\",\"alias\":\"Column Delim\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definiiton_header.columnDelim\",\"parentRole\":\"fk_definiiton_header\"},\"prefix\":{\"name\":\"prefix\",\"alias\":\"Prefix\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definiiton_header.prefix\",\"parentRole\":\"fk_definiiton_header\"},\"project_url\":{\"name\":\"project_url\",\"alias\":\"Project Url\",\"type\":\"VARCHAR\",\"generic_type\":\"text\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definiiton_header.project_url\",\"parentRole\":\"fk_definiiton_header\"},\"useColumnMap\":{\"name\":\"useColumnMap\",\"alias\":\"Use Column Map\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"useColumnMap\"}}}},\"groups\":[],\"labelPlacement\":\"left\"},\"csvcolumnmapList\":{\"name\":\"csvcolumnmapList\",\"tableName\":\"main:csvcolumnmap\",\"alias\":\"Csvcolumnmap\",\"displayed\":true,\"selected\":false,\"columnFormats\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":42.72141569408863},\"CSVAttrName\":{\"name\":\"CSVAttrName\",\"alias\":\"CSVAttr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"CSVAttrName\",\"width\":170.8856627763545},\"TableAttrName\":{\"name\":\"TableAttrName\",\"alias\":\"Table Attr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"TableAttrName\",\"width\":170.8856627763545},\"AttrDataType\":{\"name\":\"AttrDataType\",\"alias\":\"Attr Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"AttrDataType\"},\"isKeyAttr\":{\"name\":\"isKeyAttr\",\"alias\":\"Is Key Attr\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"isKeyAttr\"},\"isNullable\":{\"name\":\"isNullable\",\"alias\":\"Is Nullable\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"isNullable\"},\"dbDataType\":{\"name\":\"dbDataType\",\"alias\":\"Db Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"dbDataType\",\"width\":229.2058070025619},\"colIndex\":{\"name\":\"colIndex\",\"alias\":\"Col Index\",\"type\":\"INTEGER\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"colIndex\",\"width\":57.301451750640474},\"def_ident\":{\"name\":\"def_ident\",\"alias\":\"Def Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"def_ident\"}},\"downloadable\":false,\"gridColumns\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"ident\",\"width\":42.72141569408863},\"CSVAttrName\":{\"name\":\"CSVAttrName\",\"alias\":\"CSVAttr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"CSVAttrName\",\"width\":170.8856627763545},\"TableAttrName\":{\"name\":\"TableAttrName\",\"alias\":\"Table Attr Name\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"TableAttrName\",\"width\":170.8856627763545},\"dbDataType\":{\"name\":\"dbDataType\",\"alias\":\"Db Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"dbDataType\",\"width\":229.2058070025619},\"colIndex\":{\"name\":\"colIndex\",\"alias\":\"Col Index\",\"type\":\"INTEGER\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"colIndex\",\"width\":57.301451750640474}},\"parentSettings\":{\"fk_ColumnMap_ValidDataTypes\":{\"alias\":\"main:validdatatypes\",\"columnFormats\":{\"validDataTypes\":{\"name\":\"validDataTypes\",\"alias\":\"Valid Data Types\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.validDataTypes\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"},\"regex\":{\"name\":\"regex\",\"alias\":\"Regex\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.regex\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"},\"evalExpression\":{\"name\":\"evalExpression\",\"alias\":\"Eval Expression\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.evalExpression\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"},\"Comments\":{\"name\":\"Comments\",\"alias\":\"Comments\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.Comments\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"},\"dbDataType\":{\"name\":\"dbDataType\",\"alias\":\"Db Data Type\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_ColumnMap_ValidDataTypes.dbDataType\",\"parentRole\":\"fk_ColumnMap_ValidDataTypes\"}}},\"fk_definition_columnmap\":{\"alias\":\"main:csvdefinition\",\"columnFormats\":{\"ident\":{\"name\":\"ident\",\"alias\":\"Ident\",\"type\":\"BIGINT\",\"generic_type\":\"number\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.ident\",\"parentRole\":\"fk_definition_columnmap\"},\"csvMapName\":{\"name\":\"csvMapName\",\"alias\":\"Csv Map Name\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.csvMapName\",\"parentRole\":\"fk_definition_columnmap\"},\"tableName\":{\"name\":\"tableName\",\"alias\":\"Table Name\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.tableName\",\"parentRole\":\"fk_definition_columnmap\"},\"Description\":{\"name\":\"Description\",\"alias\":\"Description\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.Description\",\"parentRole\":\"fk_definition_columnmap\"},\"firstRowHasHeader\":{\"name\":\"firstRowHasHeader\",\"alias\":\"First Row Has Header\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.firstRowHasHeader\",\"parentRole\":\"fk_definition_columnmap\"},\"haltOnFirstError\":{\"name\":\"haltOnFirstError\",\"alias\":\"Halt On First Error\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":false,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.haltOnFirstError\",\"parentRole\":\"fk_definition_columnmap\"},\"columnDelim\":{\"name\":\"columnDelim\",\"alias\":\"Column Delim\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.columnDelim\",\"parentRole\":\"fk_definition_columnmap\"},\"prefix\":{\"name\":\"prefix\",\"alias\":\"Prefix\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.prefix\",\"parentRole\":\"fk_definition_columnmap\"},\"project_url\":{\"name\":\"project_url\",\"alias\":\"Project Url\",\"type\":\"VARCHAR\",\"generic_type\":\"string\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.project_url\",\"parentRole\":\"fk_definition_columnmap\"},\"useColumnMap\":{\"name\":\"useColumnMap\",\"alias\":\"Use Column Map\",\"type\":\"BOOLEAN\",\"generic_type\":\"boolean\",\"is_editable\":true,\"is_nullable\":true,\"mask\":null,\"maskType\":null,\"binaryType\":null,\"extensionType\":null,\"eval\":[],\"dataSource\":\"__internal.parentRows.fk_definition_columnmap.useColumnMap\",\"parentRole\":\"fk_definition_columnmap\"}}}},\"groups\":[],\"labelPlacement\":\"left\"}},\"groups\":[{\"title\":\"\",\"columns\":[\"ident\",\"csvMapName\",\"tableName\",\"firstRowHasHeader\",\"haltOnFirstError\",\"columnDelim\",\"useColumnMap\",\"project_url\",\"prefix\",\"Description\"],\"$$hashKey\":\"2JC\"}],\"labelPlacement\":\"Left\"}",
+            "app_ident": 2001,
+            "@metadata": {
+              "href": "http://localhost:8080/APIServer/rest/abl/admin/v2/ProjectExport.Applications.ApplicationTableSettings/2013",
+              "checksum": "A:87f4c230605197f1"
+            }
+          }
+        ]
+      }
+    ],
+    "NamedFilters": [
+    ],
+    "NamedSorts": [
+    ]
+  }
+]

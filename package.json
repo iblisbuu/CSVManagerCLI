@@ -1,0 +1,55 @@
+{
+  "name": "csvlac-cli",
+  "version": "1.0.0",
+  "description": "The NodeJS CSV Parser command line utility for CA Live API Creator from CA Technologies",
+  "main": "csvlac.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "CA Technologies",
+    "liveapicreator",
+    "API Server",
+    "Data Explorer",
+    "logic",
+    "command",
+    "line",
+    "REST",
+    "SQL",
+    "database",
+    "mysql",
+    "oracle",
+    "nosql",
+    "postgres",
+    "csv",
+    "excel",
+    "sqlserver",
+    "mobile",
+    "reactive"
+  ],
+  "preferGlobal": "true",
+  "bin": {
+    "csvlac" : "csvlac.js"
+  },
+  "author": "CA Technologies APIM",
+  "license": "Apache",
+  "dependencies": {
+    "colors": "^1.0.3",
+    "commander": "^2.5.0",
+    "cli-table": "0.3.1",
+    "easy-table": "0.3.0",
+    "node-rest-client": "^1.4.1",
+    "osenv": "^0.1.0",
+    "underscore": "^1.7.0",
+    "querystring":"^0.2.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EspressoLogicCafe/CSVLac.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EspressoLogicCafe/CSVLac.git/issues"
+  },
+  "homepage": "https://github.com/EspressoLogicCafe/CSVLac.git"
+}
